@@ -5,15 +5,15 @@ import MainRouter from "../src/components/routers/MainRouter";
 import GlobalReset from "../src/styles/GlobalReset";
 import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "./styles/theme";
-import Container from "@material-ui/core/Container";
+import Paper from '@material-ui/core/Paper';
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <GlobalReset />
-      <Container maxWidth="xl" style={{ backgroundColor: theme.palette.background.default, height: "100%" }}>
+      <Paper variant="outlined" square style={{ height: "100%" }}>
         <MainRouter />
-      </Container>
+      </Paper>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")

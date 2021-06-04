@@ -18,6 +18,9 @@ const theme = createMuiTheme({
     },
     success: {
       main: green[500]
+    },
+    grey: {
+      900: "#28293D"
     }
   },
 });
