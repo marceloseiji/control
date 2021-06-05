@@ -20,8 +20,9 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
-
+import ExitToApp from "@material-ui/icons/ExitToApp";
 import useStyles from "./styles";
+import authProvider from "../../../../.controllers/authController"
 
 export default function MiniDrawer() {
   const classes = useStyles();
@@ -105,6 +106,12 @@ export default function MiniDrawer() {
               <ListItemText primary={text} />
             </ListItem>
           ))}
+          <ListItem button onClick={authProvider.logOut}>
+            <ListItemIcon>
+              <ExitToApp />
+            </ListItemIcon>
+            <ListItemText />
+          </ListItem>
         </List>
       </Drawer>
       <main className={classes.content}>

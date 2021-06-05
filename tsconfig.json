@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-  ]
+, "src/.models/firebase", "src/.views/components", "src/.controllers/providers", "src/.views/styles", "src/.controllers/authController.ts", "src/.models/index.ts"  ]
 }

@@ -1,23 +1,35 @@
 import React from "react";
 import ReactDOM from "react-dom";
+
+import history from "./.views/components/routers/history";
+import GlobalReset from "./.views/styles/GlobalReset";
+import MainRouter from "./.views/components/routers/MainRouter";
+import Paper from "@material-ui/core/Paper";
 import reportWebVitals from "./reportWebVitals";
-import MainRouter from "../src/components/routers/MainRouter";
-import GlobalReset from "../src/styles/GlobalReset";
+import theme from "./.views/styles/theme";
+
+import { firebase } from "./.models/firebase";
 import { ThemeProvider } from "@material-ui/core/styles";
-import theme from "./styles/theme";
-import Paper from '@material-ui/core/Paper';
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <GlobalReset />
       <Paper variant="outlined" square style={{ height: "100%" }}>
-        <MainRouter />
+        <MainRouter history={history} />
       </Paper>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
+
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    history.push("/");
+  } else {
+    history.push("/login");
+  }
+});
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
