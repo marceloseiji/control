@@ -4,7 +4,7 @@ import LoginContainer from "./LoginContainer";
 import Paper from "./Paper";
 
 import { Typography, Button } from "@material-ui/core";
-import authProvider from "../../../../.controllers/authController";
+import authController from "../../../../.controllers/authController";
 
 const LoginPage = () => {
   return (
@@ -13,7 +13,7 @@ const LoginPage = () => {
         <Typography variant="h6" style={{ marginBottom: "15px" }}>
           Login to your account
         </Typography>
-        <Button variant="outlined" color="primary" onClick={authProvider.startLogin}>
+        <Button variant="outlined" color="primary" onClick={authController.startLogin}>
           Google Login
         </Button>
       </Paper>

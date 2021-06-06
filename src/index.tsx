@@ -15,9 +15,14 @@ ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <GlobalReset />
-      <Paper variant="outlined" square style={{ height: "100%" }}>
+      <div
+        style={{
+          height: "100%",
+          backgroundColor: theme.palette.background.default,
+        }}
+      >
         <MainRouter history={history} />
-      </Paper>
+      </div>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")

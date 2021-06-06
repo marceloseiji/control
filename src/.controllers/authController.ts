@@ -1,6 +1,6 @@
-import { firebase, googleAuthProvider } from "../.models/firebase";
+import { firebase, googleAuthProvider, database } from "../.models/firebase";
 
-const authProvider = {
+const authController = {
   startLogin: async () => {
     return firebase
       .auth()
@@ -16,6 +16,18 @@ const authProvider = {
   logOut: async () => {
     return firebase.auth().signOut();
   },
+
+  addLink: async (link: string) => {
+    database
+      .ref("utilLink")
+      .set(link)
+      .then(() => {
+        console.log("link adicionado")
+      })
+      .catch((error) => {
+        console.log("link não adicionado", error)
+      });
+  },
 };
 
-export default authProvider;
+export default authController;

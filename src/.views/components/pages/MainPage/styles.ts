@@ -1,4 +1,9 @@
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import {
+  createStyles,
+  makeStyles,
+  Theme,
+  darken,
+} from "@material-ui/core/styles";
 
 const drawerWidth = 240;
 
@@ -30,6 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "none",
     },
     drawer: {
+      backgroundColor: theme.palette.background.default,
       width: drawerWidth,
       flexShrink: 0,
       whiteSpace: "nowrap",
