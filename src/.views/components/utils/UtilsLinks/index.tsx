@@ -25,8 +25,8 @@ const UtilsLinks = () => {
       const response = utilsLinksController.addLink(e.target.value);
       if (response) {
         setLink("");
-        console.log(response);
       }
+      e.preventDefault();
     }
   };
 

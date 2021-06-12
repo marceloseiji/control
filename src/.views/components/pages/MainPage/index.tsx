@@ -1,117 +1,87 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import clsx from "clsx";
 import { useTheme } from "@material-ui/core/styles";
+import { useLocation } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
   List,
-  CssBaseline,
   Typography,
+  Avatar,
   Divider,
   IconButton,
-  Drawer
+  Paper,
 } from "@material-ui/core";
 
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import useStyles from "./styles";
 import authController from "../../../../.controllers/authController";
+import AuthContext from "../../../contexts/AuthContext";
+import NavBar from "../../global/Navbar";
+import { MenuButton } from "./MenuButton/styles";
+import { Drawer } from "../../global/SideBar/Drawer/styles";
+import Icon from "@material-ui/core/Icon";
+import { MainPanel } from "./MainPanel/index";
 
-import UtilsLinks from "../../Utils/UtilsLinks";
-import MainButton from "./MainButton";
-import Logo from "./Control.png";
-
+import UtilsLinks from "../../utils/UtilsLinks";
+import AvatarButton from "../../global/Navbar/AvatarButton";
 interface IComponent {
   element: JSX.Element | null;
   name: string;
 }
 
-export default function MiniDrawer() {
-  const classes = useStyles();
-  const theme = useTheme();
-  const [open, setOpen] = useState(false);
+export default function MainPage() {
+  let user: any = {
+    displayName: "",
+    photoURL: "",
+  };
+  user = useContext(AuthContext);
+  const location = useLocation();
+
+  const [utilName, setUtils] = useState<String>("");
   const [renderComponent, setRenderComponent] = useState<IComponent>({
     element: null,
     name: "",
   });
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
+  useEffect(() => {
+    const currentPath = location.pathname;
+    const searchParams = new URLSearchParams(location.search);
+    defineUtils(currentPath);
+  }, [location]);
+
+  const defineUtils = (currentPath: String) => {
+    console.log(currentPath);
   };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
+  const renderUtil = (render: IComponent) => {
+    setRenderComponent(render)
   };
 
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
-        <Toolbar>
-          <IconButton
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, {
-              [classes.hide]: open,
-            })}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="subtitle2" noWrap style={{color: "white"}}>
-            <img src={Logo} style={{ width: "150px" }} /> {renderComponent.name}
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        color="secondary"
-        variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        })}
-        classes={{
-          paper: clsx({
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
-          }),
-        }}
-      >
-        <div className={classes.toolbar}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "rtl" ? (
-              <ChevronRightIcon />
-            ) : (
-              <ChevronLeftIcon />
-            )}
-          </IconButton>
-        </div>
-        <Divider />
-        <List>
-          <MainButton
-            icon="link"
-            text="Links"
-            action={() =>
-              setRenderComponent({ element: <UtilsLinks />, name: " / links" })
-            }
-          />
-          <MainButton
-            icon="logout"
-            text="Logout"
-            action={authController.logOut}
-          />
-        </List>
+    <>
+      <NavBar utilName={utilName} />
+      <Drawer variant="permanent">
+        <MenuButton
+          onClick={() => {
+            renderUtil({
+              element: <UtilsLinks />,
+              name: " / links",
+            });
+          }}
+        >
+          <Icon>link</Icon>
+          <Typography variant="subtitle2">Link</Typography>
+        </MenuButton>
+        <MenuButton onClick={authController.logOut}>
+          <Icon>logout</Icon>
+          <Typography variant="subtitle2">Logout</Typography>
+        </MenuButton>
       </Drawer>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
+      <MainPanel>
         {renderComponent.element}
-      </main>
-    </div>
+      </MainPanel>
+    </>
   );
 }

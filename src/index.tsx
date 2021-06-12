@@ -4,27 +4,20 @@ import ReactDOM from "react-dom";
 import history from "./.views/components/routers/history";
 import GlobalReset from "./.views/styles/GlobalReset";
 import MainRouter from "./.views/components/routers/MainRouter";
-import Paper from "@material-ui/core/Paper";
 import reportWebVitals from "./reportWebVitals";
 import theme from "./.views/styles/theme";
 
 import { firebase } from "./.models/firebase";
 import { ThemeProvider } from "@material-ui/core/styles";
+import { RootContainer } from "./.views/styles/styles";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <GlobalReset />
-      <div
-        style={{
-          height: "100%",
-          backgroundColor: theme.palette.background.default,
-        }}
-      >
-        <MainRouter history={history} />
-      </div>
-    </ThemeProvider>
-  </React.StrictMode>,
+  <ThemeProvider theme={theme}>
+    <GlobalReset />
+    <RootContainer>
+      <MainRouter history={history} />
+    </RootContainer>
+  </ThemeProvider>,
   document.getElementById("root")
 );
 

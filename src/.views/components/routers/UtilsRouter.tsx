@@ -1,6 +1,6 @@
 import React from "react";
 import { Router, Route } from "react-router-dom";
-import UtilsLinks from "../Utils/UtilsLinks"
+import UtilsLinks from "../utils/UtilsLinks"
 
 const MainRouter = ({ history }: any) => {
   return (
