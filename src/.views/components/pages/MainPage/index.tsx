@@ -56,7 +56,7 @@ export default function MainPage() {
   };
 
   const renderUtil = (render: IComponent) => {
-    setRenderComponent(render)
+    setRenderComponent(render);
   };
 
   return (
