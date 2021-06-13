@@ -6,6 +6,9 @@ import theme from "../../../styles/theme";
 export const AppBar = styled(AppBarS)`
   background-color: ${theme.palette.background.paper} !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  .MuiToolbar-root {
+    justify-content: space-between;
+  }
   .MuiSvgIcon-root path {
     color: ${theme.palette.type === "dark"
       ? theme.palette.primary.main
@@ -18,4 +21,9 @@ export const IconButton = styled(IconButtonS)`
   &:hover {
     background-color: transparent;
   }
+`;
+
+export const  NavContainer = styled.div`
+  display: flex;
+  align-items: center;
 `;

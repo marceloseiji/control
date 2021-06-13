@@ -39,7 +39,6 @@ const UtilsLinks = () => {
     utilsLinksController.getAllLinks(user.uid).then((res) => {
       setLinks(res);
       setLoading(false);
-      console.log(res);
     });
   };
 

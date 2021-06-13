@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { AppBar } from "./styles";
+import { AppBar, NavContainer } from "./styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
@@ -9,6 +9,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import AuthContext from "../../../contexts/AuthContext";
 import AvatarButton from "./AvatarButton";
+import logo from "../../../images/Control.png";
 
 interface IUtils {
   utilName: String;
@@ -55,17 +56,17 @@ export default function NavBar({ utilName }: IUtils) {
   return (
     <AppBar position="static">
       <Toolbar>
-        <IconButton
-          edge="start"
-          className={classes.menuButton}
-          color="inherit"
-          aria-label="menu"
-        >
-          <MenuIcon />
-        </IconButton>
-        <Typography variant="h6" className={classes.title}>
-          {utilName}
-        </Typography>
+        <NavContainer>
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+          >
+            <MenuIcon />
+          </IconButton>
+          <img src={logo} style={{ width: "100px" }} />
+        </NavContainer>
         {auth && (
           <div>
             <AvatarButton

@@ -1,8 +1,6 @@
 import styled from "styled-components/macro";
 import theme from "../../../styles/theme";
 
-
-
 export const LinksContainer = styled.div`
   display: inline-block;
   flex-direction: column;

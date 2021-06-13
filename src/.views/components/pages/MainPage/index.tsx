@@ -20,14 +20,14 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import authController from "../../../../.controllers/authController";
 import AuthContext from "../../../contexts/AuthContext";
 import NavBar from "../../global/Navbar";
-import { MenuButton } from "./MenuButton/styles";
 import { Drawer } from "../../global/SideBar/Drawer/styles";
 import { MainPanel } from "./MainPanel/index";
 import UtilsLinks from "../../utils/UtilsLinks";
 import AvatarButton from "../../global/Navbar/AvatarButton";
 import UtilsToDo from "../../utils/UtilsToDo";
+import { ButtonActive } from "./ButtonActive/index";
 interface IComponent {
-  element: JSX.Element | null;
+  element: any;
   name: string;
 }
 
@@ -38,8 +38,7 @@ export default function MainPage() {
   };
   user = useContext(AuthContext);
   const location = useLocation();
-
-  const [utilName, setUtils] = useState<String>("");
+  const [utilsName, setUtilsName] = useState<String>("");
   const [renderComponent, setRenderComponent] = useState<IComponent>({
     element: null,
     name: "",
@@ -57,27 +56,34 @@ export default function MainPage() {
 
   const renderUtil = (render: IComponent) => {
     setRenderComponent(render);
+    setUtilsName(render.name);
+  };
+
+  const getActive = (toActive: string) => {
+    const isActive = toActive === utilsName;
+    return isActive;
   };
 
   return (
     <>
-      <NavBar utilName={utilName} />
+      <NavBar utilName={utilsName} />
       <Drawer variant="permanent">
-        <MenuButton
+        <ButtonActive
           onClick={() => {
             renderUtil({
               element: <UtilsLinks />,
-              name: " / links",
+              name: "links",
             });
           }}
-        >
-          <Icon>link</Icon>
-          <Typography variant="subtitle2">Link</Typography>
-        </MenuButton>
-        <MenuButton onClick={authController.logOut}>
-          <Icon>logout</Icon>
-          <Typography variant="subtitle2">Logout</Typography>
-        </MenuButton>
+          icon="link"
+          text="Link"
+          active={getActive("links")}
+        />
+        <ButtonActive
+          onClick={authController.logOut}
+          icon="logout"
+          text="Logout"
+        />
       </Drawer>
       <MainPanel>
         {renderComponent.element}

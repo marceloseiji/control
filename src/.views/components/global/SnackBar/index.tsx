@@ -7,7 +7,6 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
-
 interface ISnack {
   openState: {
     setOpen: Function;
