@@ -11,6 +11,7 @@ import {
   Divider,
   IconButton,
   Paper,
+  Icon,
 } from "@material-ui/core";
 
 import MenuIcon from "@material-ui/icons/Menu";
@@ -21,9 +22,7 @@ import AuthContext from "../../../contexts/AuthContext";
 import NavBar from "../../global/Navbar";
 import { MenuButton } from "./MenuButton/styles";
 import { Drawer } from "../../global/SideBar/Drawer/styles";
-import Icon from "@material-ui/core/Icon";
 import { MainPanel } from "./MainPanel/index";
-
 import UtilsLinks from "../../utils/UtilsLinks";
 import AvatarButton from "../../global/Navbar/AvatarButton";
 import UtilsToDo from "../../utils/UtilsToDo";

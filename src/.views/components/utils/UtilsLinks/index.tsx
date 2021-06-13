@@ -12,6 +12,7 @@ import {
   ListItemIcon,
   ListItem,
   TextField,
+  LinearProgress,
 } from "@material-ui/core";
 import EventEmitter from "events";
 import AuthContext from "../../../contexts/AuthContext";
@@ -24,6 +25,7 @@ const UtilsLinks = () => {
   const [links, setLinks] = useState<any[]>();
   const [link, setLink] = useState<string>("");
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [severity, setSeverity] = useState<any>();
   const user: any = useContext(AuthContext);
@@ -33,8 +35,10 @@ const UtilsLinks = () => {
   }, []);
 
   const getLinks = () => {
+    setLoading(true);
     utilsLinksController.getAllLinks(user.uid).then((res) => {
       setLinks(res);
+      setLoading(false);
       console.log(res);
     });
   };
@@ -86,6 +90,7 @@ const UtilsLinks = () => {
             onKeyDown={keyPress}
           />
         </FormContainer>
+        {loading && <LinearProgress />}
         {links &&
           links.length > 0 &&
           links.map((link) => (
