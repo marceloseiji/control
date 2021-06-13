@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from "react";
-
 import {
   Drawer,
   AppBar,
@@ -68,26 +67,25 @@ const UtilsLinks = () => {
             setSeverity("error");
           }
         });
-
       e.preventDefault();
     }
   };
 
   return (
     <>
-      <FormContainer>
-        <TextField
-          value={link}
-          id="add-link"
-          label="Link here"
-          helperText="press enter to add a link"
-          onChange={(e) => {
-            setLink(e.target.value);
-          }}
-          onKeyDown={keyPress}
-        />
-      </FormContainer>
       <LinksContainer>
+        <FormContainer>
+          <TextField
+            value={link}
+            id="add-link"
+            label="Link here"
+            helperText="press enter to add a link"
+            onChange={(e) => {
+              setLink(e.target.value);
+            }}
+            onKeyDown={keyPress}
+          />
+        </FormContainer>
         {links &&
           links.length > 0 &&
           links.map((link) => (

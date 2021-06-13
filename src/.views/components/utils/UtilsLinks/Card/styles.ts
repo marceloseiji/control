@@ -1,7 +1,9 @@
 import styled from "styled-components/macro";
 import theme from "../../../../styles/theme";
+import { Paper } from "@material-ui/core";
 
-export const CardContainer = styled.div`
+
+export const CardContainer = styled(Paper)`
   background-color: ${theme.palette.background.paper};
   padding: ${theme.spacing(1, 3, 1, 2)};
   margin: ${theme.spacing(1, 0)};

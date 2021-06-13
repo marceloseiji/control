@@ -26,6 +26,7 @@ import { MainPanel } from "./MainPanel/index";
 
 import UtilsLinks from "../../utils/UtilsLinks";
 import AvatarButton from "../../global/Navbar/AvatarButton";
+import UtilsToDo from "../../utils/UtilsToDo";
 interface IComponent {
   element: JSX.Element | null;
   name: string;
@@ -81,6 +82,7 @@ export default function MainPage() {
       </Drawer>
       <MainPanel>
         {renderComponent.element}
+        <UtilsToDo />
       </MainPanel>
     </>
   );
