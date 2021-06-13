@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { Icon, IconButton } from "@material-ui/core";
-import utilsLinksController from "../../../../../.controllers/utilsLinksController";
+import { Icon, IconButton, Typography } from "@material-ui/core";
 import AuthContext from "../../../../contexts/AuthContext";
+import { CardContainer } from "./styles";
 
 interface ILink {
   link?: any;
@@ -10,27 +10,23 @@ interface ILink {
   remove: Function;
 }
 
-interface IRemove {
-  
-}
-
 const Card = ({ link, remove }: ILink) => {
   const user: any = useContext(AuthContext);
 
   return (
-    <>
-      <a href={link.text} target="blank">
-        {link.text}
-      </a>
+    <CardContainer>
       <IconButton
         aria-label="delete"
         onClick={() => {
-          remove(link.id, user.uid)
+          remove(link.id, user.uid);
         }}
       >
         <Icon>delete</Icon>
       </IconButton>
-    </>
+      <a href={link.text} target="blank">
+        <Typography variant="body2">{link.text}</Typography>
+      </a>
+    </CardContainer>
   );
 };
 

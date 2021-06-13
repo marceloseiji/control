@@ -19,7 +19,7 @@ import AuthContext from "../../../contexts/AuthContext";
 import utilsLinksController from "../../../../.controllers/utilsLinksController";
 import SnackBar from "../../../components/global/SnackBar";
 import Card from "./Card";
-import { LinksContainer } from "./styles";
+import { LinksContainer, FormContainer } from "./styles";
 
 const UtilsLinks = () => {
   const [links, setLinks] = useState<any[]>();
@@ -74,28 +74,32 @@ const UtilsLinks = () => {
   };
 
   return (
-    <LinksContainer>
-      <TextField
-        value={link}
-        id="add-link"
-        label="Link here"
-        helperText="press enter to add a link"
-        onChange={(e) => {
-          setLink(e.target.value);
-        }}
-        onKeyDown={keyPress}
-      />
-      {links &&
-        links.length > 0 &&
-        links.map((link) => (
-          <Card link={link} key={link.id} remove={removeLink} />
-        ))}
-      <SnackBar
-        openState={{ open, setOpen }}
-        message={message}
-        severity={severity}
-      />
-    </LinksContainer>
+    <>
+      <FormContainer>
+        <TextField
+          value={link}
+          id="add-link"
+          label="Link here"
+          helperText="press enter to add a link"
+          onChange={(e) => {
+            setLink(e.target.value);
+          }}
+          onKeyDown={keyPress}
+        />
+      </FormContainer>
+      <LinksContainer>
+        {links &&
+          links.length > 0 &&
+          links.map((link) => (
+            <Card link={link} key={link.id} remove={removeLink} />
+          ))}
+        <SnackBar
+          openState={{ open, setOpen }}
+          message={message}
+          severity={severity}
+        />
+      </LinksContainer>
+    </>
   );
 };
 
