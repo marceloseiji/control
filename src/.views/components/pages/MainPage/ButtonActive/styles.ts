@@ -4,7 +4,7 @@ import theme from "../../../../styles/theme";
 export const ButtonActiveS = styled.a`
   align-items: center;
   display: flex;
-  padding: ${theme.spacing(2, 2)};
+  padding: ${theme.spacing(2, 3)};
   &:hover {
     cursor: pointer;
     .MuiIcon-root,

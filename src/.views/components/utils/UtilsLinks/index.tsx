@@ -20,6 +20,7 @@ import utilsLinksController from "../../../../.controllers/utilsLinksController"
 import SnackBar from "../../../components/global/SnackBar";
 import Card from "./Card";
 import { LinksContainer, FormContainer } from "./styles";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const UtilsLinks = () => {
   const [links, setLinks] = useState<any[]>();
@@ -28,6 +29,7 @@ const UtilsLinks = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [severity, setSeverity] = useState<any>();
+  const [linkListReorder, setLinkLIstReorder] = useState<any>();
   const user: any = useContext(AuthContext);
 
   useEffect(() => {
@@ -74,34 +76,65 @@ const UtilsLinks = () => {
     }
   };
 
+  const reorder = (list: any, startIndex: any, endIndex: any) => {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+
+    return result;
+  };
+
+  const onDragEnd = (result: any) => {
+    // dropped outside the list
+    if (!result.destination) {
+      return;
+    }
+    const items = reorder(links, result.source.index, result.destination.index);
+    setLinks(items);
+  };
+
   return (
-    <>
-      <LinksContainer>
-        <FormContainer>
-          <TextField
-            value={link}
-            id="add-link"
-            label="Link here"
-            helperText="press enter to add a link"
-            onChange={(e) => {
-              setLink(e.target.value);
-            }}
-            onKeyDown={keyPress}
-          />
-        </FormContainer>
-        {loading && <LinearProgress />}
-        {links &&
-          links.length > 0 &&
-          links.map((link) => (
-            <Card link={link} key={link.id} remove={removeLink} />
-          ))}
-        <SnackBar
-          openState={{ open, setOpen }}
-          message={message}
-          severity={severity}
-        />
-      </LinksContainer>
-    </>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <Droppable droppableId="droppable">
+        {(provided, snapshot) => (
+          <LinksContainer ref={provided.innerRef} {...provided.droppableProps}>
+            <FormContainer>
+              <TextField
+                value={link}
+                id="add-link"
+                label="Link here"
+                helperText="press enter to add a link"
+                onChange={(e) => {
+                  setLink(e.target.value);
+                }}
+                onKeyDown={keyPress}
+              />
+            </FormContainer>
+            {loading && <LinearProgress />}
+            {links &&
+              links.length > 0 &&
+              links.map((link, index) => (
+                <Draggable key={link.id} draggableId={link.id} index={index}>
+                  {(provided, snapshot) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.dragHandleProps}
+                      {...provided.draggableProps}
+                    >
+                      <Card link={link} remove={removeLink} />
+                    </div>
+                  )}
+                </Draggable>
+              ))}
+            <SnackBar
+              openState={{ open, setOpen }}
+              message={message}
+              severity={severity}
+            />
+          </LinksContainer>
+        )}
+      </Droppable>
+    </DragDropContext>
   );
 };
 
