@@ -1,7 +1,19 @@
-import React, { useContext } from "react";
-import { Icon, IconButton, Typography } from "@material-ui/core";
+import React, { useContext, useState } from "react";
+import {
+  Icon,
+  IconButton,
+  Typography,
+  CircularProgress,
+} from "@material-ui/core";
 import AuthContext from "../../../../contexts/AuthContext";
-import { CardContainer, CardOverlay, CardInfos } from "./styles";
+import {
+  CardContainer,
+  CardOverlay,
+  CardInfos,
+  CardPreview,
+  PreviewLoader,
+} from "./styles";
+import { LinkPreview } from "@dhaiwat10/react-link-preview";
 
 interface ILink {
   data: {
@@ -10,12 +22,22 @@ interface ILink {
     id: string;
   };
   remove: Function;
+  onMouseEnter: any;
 }
 
-const Card = ({ data, remove }: ILink) => {
+const Card = ({ data, remove, onMouseEnter }: ILink) => {
   const user: any = useContext(AuthContext);
+  const [showPreview, setShowPreview] = useState(false);
+
+  const toggleShowPreview = () => {
+    setShowPreview(!showPreview);
+  };
+
   return (
-    <CardContainer>
+    <CardContainer
+      onMouseEnter={toggleShowPreview}
+      onMouseLeave={toggleShowPreview}
+    >
       <CardInfos>
         <IconButton
           aria-label="delete"
@@ -30,6 +52,20 @@ const Card = ({ data, remove }: ILink) => {
         </a>
       </CardInfos>
       <CardOverlay />
+      {showPreview && (
+        <CardPreview>
+          <LinkPreview
+            url={data.link}
+            width="250px"
+            height="250px"
+            customLoader={
+              <PreviewLoader>
+                <CircularProgress />
+              </PreviewLoader>
+            }
+          />
+        </CardPreview>
+      )}
     </CardContainer>
   );
 };

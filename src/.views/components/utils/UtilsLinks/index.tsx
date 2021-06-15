@@ -128,7 +128,7 @@ const UtilsLinks = () => {
                       {...provided.dragHandleProps}
                       {...provided.draggableProps}
                     >
-                      <Card data={link} remove={removeLink} />
+                      <Card data={link} remove={removeLink} onMouseEnter />
                     </div>
                   )}
                 </Draggable>

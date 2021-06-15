@@ -12,7 +12,6 @@ export const CardContainer = styled.div`
   padding: ${theme.spacing(1, 3, 1, 2)};
   margin: ${theme.spacing(1, 0)};
   position: relative;
-  z-index: 0;
   button {
     padding: ${theme.spacing(0, 1, 0, 0)};
   }
@@ -58,4 +57,19 @@ export const CardInfos = styled.div`
   width: 100%;
   height: 100%;
   z-index: 1;
+`;
+
+export const CardPreview = styled.div`
+  position: absolute;
+  top: -100px;
+  left: 200px;
+  z-index: 5000;
+`;
+
+export const PreviewLoader = styled.div`
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  width: 100px;
+  height: 100px;
 `;
