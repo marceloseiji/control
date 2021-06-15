@@ -7,10 +7,11 @@ const utilsLinksController = {
       .once("value")
       .then((snapshot) => {
         const links: any = [];
-        snapshot.forEach((link: any) => {
+        snapshot.forEach((link) => {
           links.push({
             id: link.key,
-            text: link.val(),
+            link: link.val().link,
+            position: link.val().position,
           });
         });
         return links;
@@ -18,10 +19,13 @@ const utilsLinksController = {
     return await links;
   },
 
-  addLink: async (link: string, uid: string) => {
+  addLink: async (link: string, uid: string, links: any[]) => {
     let res = database
       .ref(`users/${uid}/links`)
-      .push(link)
+      .push({
+        link: link,
+        position: links.length > 0 ? links[links.length - 1].position + 1 : 0,
+      })
       .then((e) => {
         console.log("Link adicionado: ", link);
         return e;
@@ -34,7 +38,6 @@ const utilsLinksController = {
   },
 
   removeLink: async (id: string, uid: string) => {
-    console.log(id, uid)
     let res = database
       .ref(`users/${uid}/links/${id}`)
       .set(null)
@@ -46,6 +49,22 @@ const utilsLinksController = {
         res = error;
       });
     return await res;
+  },
+
+  updateDnd: async (uid: string, first: any, end: any) => {
+    database
+      .ref(`users/${uid}/links/${first.id}`)
+      .update({ link: first.link })
+      .catch((error) => {
+        console.log("Houve algum erro na atualização!");
+      });
+
+    database
+      .ref(`users/${uid}/links/${end.id}`)
+      .update({ link: end.link })
+      .catch((error) => {
+        console.log("Houve algum erro na atualização!");
+      });
   },
 };
 

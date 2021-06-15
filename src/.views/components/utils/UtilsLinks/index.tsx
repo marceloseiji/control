@@ -23,7 +23,7 @@ import { LinksContainer, FormContainer } from "./styles";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const UtilsLinks = () => {
-  const [links, setLinks] = useState<any[]>();
+  const [links, setLinks] = useState<any[]>([]);
   const [link, setLink] = useState<string>("");
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -58,7 +58,7 @@ const UtilsLinks = () => {
   const keyPress = (e: any) => {
     if (e.keyCode === 13) {
       utilsLinksController
-        .addLink(e.target.value, user.uid)
+        .addLink(e.target.value, user.uid, links)
         .then((response) => {
           if (response && response.key) {
             setLink("");
@@ -77,10 +77,17 @@ const UtilsLinks = () => {
   };
 
   const reorder = (list: any, startIndex: any, endIndex: any) => {
-    const result = Array.from(list);
-    const [removed] = result.splice(startIndex, 1);
-    result.splice(endIndex, 0, removed);
+    const result: any = Array.from(list);
 
+    const dbUpdateFirst = result[startIndex];
+    const dbUpdateEnd = result[endIndex];
+    const linkHolder = result[startIndex].link;
+    dbUpdateFirst.link = result[endIndex].link;
+    dbUpdateEnd.link = linkHolder;
+    utilsLinksController.updateDnd(user.uid, dbUpdateFirst, dbUpdateEnd);
+    
+    const [removed]: any = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
     return result;
   };
 
@@ -90,7 +97,7 @@ const UtilsLinks = () => {
       return;
     }
     const items = reorder(links, result.source.index, result.destination.index);
-    setLinks(items);
+    // setLinks(items);
   };
 
   return (
@@ -121,7 +128,7 @@ const UtilsLinks = () => {
                       {...provided.dragHandleProps}
                       {...provided.draggableProps}
                     >
-                      <Card link={link} remove={removeLink} />
+                      <Card data={link} remove={removeLink} />
                     </div>
                   )}
                 </Draggable>
