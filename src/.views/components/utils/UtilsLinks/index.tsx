@@ -85,7 +85,7 @@ const UtilsLinks = () => {
     dbUpdateFirst.link = result[endIndex].link;
     dbUpdateEnd.link = linkHolder;
     utilsLinksController.updateDnd(user.uid, dbUpdateFirst, dbUpdateEnd);
-    
+
     const [removed]: any = result.splice(startIndex, 1);
     result.splice(endIndex, 0, removed);
     return result;
@@ -104,7 +104,7 @@ const UtilsLinks = () => {
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="droppable">
         {(provided, snapshot) => (
-          <LinksContainer ref={provided.innerRef} {...provided.droppableProps}>
+          <LinksContainer ref={provided.innerRef} {...provided.droppableProps} item xs={12} sm={9}>
             <FormContainer>
               <TextField
                 value={link}
@@ -128,7 +128,7 @@ const UtilsLinks = () => {
                       {...provided.dragHandleProps}
                       {...provided.draggableProps}
                     >
-                      <Card data={link} remove={removeLink} onMouseEnter />
+                      <Card data={link} remove={removeLink} />
                     </div>
                   )}
                 </Draggable>

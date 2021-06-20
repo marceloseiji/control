@@ -1,7 +1,9 @@
 import styled from "styled-components/macro";
 import theme from "../../../styles/theme";
+import Grid from '@material-ui/core/Grid';
 
-export const LinksContainer = styled.div`
+export const LinksContainer = styled(Grid)`
+  padding: ${theme.spacing(0, 3, 0, 0)};
   display: inline-block;
   flex-direction: column;
 `;

@@ -2,6 +2,10 @@ import styled from "styled-components/macro";
 import theme from "../../../../styles/theme";
 import { Paper } from "@material-ui/core";
 
+interface ICard {
+  xPosition?: number;
+}
+
 export const CardContainer = styled.div`
   background: linear-gradient(
     to right,
@@ -50,19 +54,23 @@ export const CardOverlay = styled.div`
 `;
 
 export const CardInfos = styled.div`
+  display: flex;
   position: relative;
   top: 0;
-  left: 0;
   border-radius: 3px;
-  width: 100%;
+  line-break: anywhere;
   height: 100%;
+  width: 100%;
   z-index: 1;
 `;
 
-export const CardPreview = styled.div`
+export const CardPreview = styled.div<ICard>`
   position: absolute;
   top: -100px;
-  left: 200px;
+  left: ${(props) =>
+    props.xPosition && props.xPosition > 250
+      ? props.xPosition - 250
+      : props.xPosition}px;
   z-index: 5000;
 `;
 

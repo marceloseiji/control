@@ -1,12 +1,12 @@
 import styled from "styled-components/macro";
 import theme from "../../../styles/theme";
 import { Paper } from "@material-ui/core";
+import Grid from '@material-ui/core/Grid';
 
-export const TodoContainer = styled(Paper)`
+export const TodoContainer = styled(Grid)`
+  background-color: ${theme.palette.background.paper};
+  border-radius: 3px;
   padding: ${theme.spacing(2, 2)};
-  float: right;
-  width: 320px;
-  height: 100%;
   p {
     color: ${theme.palette.primary.main};
   }

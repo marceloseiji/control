@@ -26,6 +26,7 @@ import UtilsLinks from "../../utils/UtilsLinks";
 import AvatarButton from "../../global/Navbar/AvatarButton";
 import UtilsToDo from "../../utils/UtilsToDo";
 import { ButtonActive } from "./ButtonActive/index";
+
 interface IComponent {
   element: any;
   name: string;
@@ -85,7 +86,7 @@ export default function MainPage() {
           text="Logout"
         />
       </Drawer>
-      <MainPanel>
+      <MainPanel container>
         {renderComponent.element}
         <UtilsToDo />
       </MainPanel>

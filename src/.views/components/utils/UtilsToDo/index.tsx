@@ -19,7 +19,7 @@ import { TodoContainer, Title } from "./styles";
 
 const UtilsToDo = () => {
   return (
-    <TodoContainer>
+    <TodoContainer item xs={12} sm={3}>
       <Title>
         <Typography variant="body2">TO DO LIST</Typography>
         <IconButton

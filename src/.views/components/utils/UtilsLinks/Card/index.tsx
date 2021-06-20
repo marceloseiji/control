@@ -20,23 +20,31 @@ interface ILink {
     link: string;
     position: number;
     id: string;
+    uid: string;
   };
   remove: Function;
-  onMouseEnter: any;
 }
 
-const Card = ({ data, remove, onMouseEnter }: ILink) => {
+const Card = ({ data, remove }: ILink) => {
   const user: any = useContext(AuthContext);
   const [showPreview, setShowPreview] = useState(false);
+  const [xPosition, setXPosition] = useState<number>();
 
   const toggleShowPreview = () => {
     setShowPreview(!showPreview);
+  };
+
+  const showPositionx = (e: any) => {
+    setXPosition(e.clientX);
   };
 
   return (
     <CardContainer
       onMouseEnter={toggleShowPreview}
       onMouseLeave={toggleShowPreview}
+      onMouseOverCapture={(e) => {
+        showPositionx(e);
+      }}
     >
       <CardInfos>
         <IconButton
@@ -53,7 +61,7 @@ const Card = ({ data, remove, onMouseEnter }: ILink) => {
       </CardInfos>
       <CardOverlay />
       {showPreview && (
-        <CardPreview>
+        <CardPreview xPosition={xPosition}>
           <LinkPreview
             url={data.link}
             width="250px"
