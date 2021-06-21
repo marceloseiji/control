@@ -60,6 +60,10 @@ const UtilsToDo = () => {
 
   const user: any = useContext(AuthContext);
 
+  const ToggleShow = () => {
+    setNewTaskShow(!newTaskShow);
+  };
+
   const saveTask = () => {
     toDoController
       .addTask(
@@ -73,7 +77,7 @@ const UtilsToDo = () => {
       )
       .then((response) => {
         if (response) {
-          setNewTaskShow(false);
+          ToggleShow();
           setTitle("");
           setText("");
           setEndDate(null);
@@ -90,10 +94,11 @@ const UtilsToDo = () => {
         <Typography variant="body2">TO DO LIST</Typography>
         <IconButton
           onClick={() => {
-            setNewTaskShow(true);
+            ToggleShow();
           }}
         >
-          <Icon>add_circle</Icon>
+          {!newTaskShow && (<Icon>add_circle</Icon>)}
+          {newTaskShow && (<Icon>remove_circle</Icon>)}
         </IconButton>
       </TitleContainer>
       <NewTaskContainer newTaskShow={newTaskShow}>
