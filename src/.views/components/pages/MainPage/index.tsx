@@ -52,7 +52,7 @@ export default function MainPage() {
   }, [location]);
 
   const defineUtils = (currentPath: String) => {
-    console.log(currentPath);
+    console.log("currentPath: ", currentPath);
   };
 
   const renderUtil = (render: IComponent) => {

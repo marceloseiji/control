@@ -1,23 +1,29 @@
 import { firebase, googleAuthProvider, database } from "../.models/firebase";
 
 const ToDoContainer = {
-  // getAllLinks: async (uid: string) => {
-  //   let links = database
-  //     .ref(`users/${uid}/links`)
-  //     .once("value")
-  //     .then((snapshot) => {
-  //       const links: any = [];
-  //       snapshot.forEach((link) => {
-  //         links.push({
-  //           id: link.key,
-  //           link: link.val().link,
-  //           position: link.val().position,
-  //         });
-  //       });
-  //       return links;
-  //     });
-  //   return await links;
-  // },
+  getAllTasks: async (uid: string) => {
+    let tasks = database
+      .ref(`users/${uid}/todos`)
+      .once("value")
+      .then((snapshot) => {
+        const tasks: any = [];
+        snapshot.forEach((task) => {
+          tasks.push({
+            id: task.key,
+            text: task.val().text,
+            title: task.val().title,
+            createdDate: task.val().createdDate,
+            endDate: task.val().endDate,
+            completed: task.val().completed,
+          });
+        });
+        return tasks;
+      })
+      .catch((error) => {
+        console.log("Some error: ", error);
+      });
+    return await tasks;
+  },
 
   addTask: async (task: any, uid: string) => {
     let res = database
@@ -26,6 +32,21 @@ const ToDoContainer = {
       .then((e) => {
         console.log("Task added: ", task);
         return e;
+      })
+      .catch((error) => {
+        console.log("Some error: ", error);
+        res = error;
+      });
+    return await res;
+  },
+
+  check: async (id: string | undefined, uid: string, completed: boolean) => {
+    let res = database
+      .ref(`users/${uid}/todos/${id}/`)
+      .update({ completed: !completed })
+      .then(() => {
+        console.log("Task set as completed: ");
+        return "Task Updated";
       })
       .catch((error) => {
         console.log("Some error: ", error);

@@ -22,7 +22,8 @@ export const TaskContainer = styled.div`
   align-items: center;
   width: 100%;
   display: flex;
-  transform: scaleY(0);
+  margin-top: 25px;
+  flex-direction: column;
   .MuiButtonBase-root {
     color: ${theme.palette.primary.main};
     margin-left: ${theme.spacing(1)}px;
@@ -38,6 +39,7 @@ export const NewTaskContainer = styled.div<INewTask>`
   width: 100%;
   display: flex;
   transform: ${(props) => (props.newTaskShow ? "scaleY(1)" : "scaleY(0)")};
+  height: ${(props) => (props.newTaskShow ? "270px" : "0%")};
   transition: 0.3s ease;
   transform-origin: top left;
   button {

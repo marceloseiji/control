@@ -40,10 +40,12 @@ import {
 import "react-dates/lib/css/_datepicker.css";
 
 interface ITask {
-  title?: string;
-  text?: string;
-  createdDate?: any;
-  endDate?: any;
+  title?: string | undefined;
+  text?: string | undefined;
+  createdDate?: any | undefined;
+  endDate?: any | undefined;
+  id?: string;
+  completed: boolean;
 }
 
 const UtilsToDo = () => {
@@ -52,6 +54,7 @@ const UtilsToDo = () => {
   const [severity, setSeverity] = useState<any>();
   const [newTaskShow, setNewTaskShow] = useState(false);
   const [focused, setFocused] = useState(false);
+  const [tasks, setTasks] = useState<ITask[]>();
 
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
@@ -63,6 +66,18 @@ const UtilsToDo = () => {
   const ToggleShow = () => {
     setNewTaskShow(!newTaskShow);
   };
+
+  const loadTasks = (uid: string) => {
+    toDoController.getAllTasks(uid).then((res) => {
+      setTasks(res);
+    });
+  };
+
+  useEffect(() => {
+    if (user && user.uid) {
+      loadTasks(user.uid);
+    }
+  }, [user]);
 
   const saveTask = () => {
     toDoController
@@ -97,8 +112,8 @@ const UtilsToDo = () => {
             ToggleShow();
           }}
         >
-          {!newTaskShow && (<Icon>add_circle</Icon>)}
-          {newTaskShow && (<Icon>remove_circle</Icon>)}
+          {!newTaskShow && <Icon>add_circle</Icon>}
+          {newTaskShow && <Icon>remove_circle</Icon>}
         </IconButton>
       </TitleContainer>
       <NewTaskContainer newTaskShow={newTaskShow}>
@@ -159,7 +174,23 @@ const UtilsToDo = () => {
         severity={severity}
       />
       <TaskContainer>
-        {/* <Card text={text} title={title} date={date} /> */}
+        {tasks &&
+          tasks.length > 0 &&
+          tasks.map((task) => {
+            return (
+              <Card
+                id={task.id}
+                key={task.id}
+                text={task.text}
+                title={task.title}
+                endDate={task.endDate}
+                createdDate={task.createdDate}
+                completed={task.completed}
+                tasks={tasks}
+                setTasks={setTasks}
+              />
+            );
+          })}
       </TaskContainer>
     </ToDoContainer>
   );
