@@ -9,6 +9,5 @@ export const LinksContainer = styled(Grid)`
 `;
 
 export const FormContainer = styled.div`
-  display: inline;
   margin: ${theme.spacing(1, 1, 2, 1)};
 `;

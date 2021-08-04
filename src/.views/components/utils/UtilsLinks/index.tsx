@@ -123,13 +123,13 @@ const UtilsLinks = () => {
               links.map((link, index) => (
                 <Draggable key={link.id} draggableId={link.id} index={index}>
                   {(provided, snapshot) => (
-                    <div
+                    <span
                       ref={provided.innerRef}
                       {...provided.dragHandleProps}
                       {...provided.draggableProps}
                     >
                       <Card data={link} remove={removeLink} />
-                    </div>
+                    </span>
                   )}
                 </Draggable>
               ))}

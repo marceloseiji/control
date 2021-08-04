@@ -8,6 +8,7 @@ interface INewTask {
 }
 
 export const ToDoContainer = styled(Grid)`
+  margin-left: auto !important;
   background-color: ${theme.palette.background.paper};
   border-radius: 3px;
   display: flex;

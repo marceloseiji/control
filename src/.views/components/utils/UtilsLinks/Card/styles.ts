@@ -7,12 +7,16 @@ interface ICard {
 }
 
 export const CardContainer = styled.div`
+  &:nth-child(n + 1) {
+    margin-right: ${theme.spacing(1)}px;
+  }
+  display: inline-block;
   background: linear-gradient(
     to right,
     ${theme.palette.background.paper},
     ${theme.palette.primary.main}55
   );
-  border-radius: 3px;
+  border-radius: 30px;
   padding: ${theme.spacing(1, 3, 1, 2)};
   margin: ${theme.spacing(1, 0)};
   position: relative;
@@ -21,9 +25,6 @@ export const CardContainer = styled.div`
   }
   transition: 0.3s ease;
   &:hover {
-    .jcEXZt {
-      background-color: transparent;
-    }
     button {
       &: hover {
         color: ${theme.palette.primary.main};
@@ -38,6 +39,11 @@ export const CardContainer = styled.div`
       color: white;
     }
   }
+  &:hover {
+    .styles__CardOverlay-sc-129sktc-1 {
+      background-color: transparent;
+    }
+  }
 `;
 
 export const CardOverlay = styled.div`
@@ -45,8 +51,7 @@ export const CardOverlay = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  border-radius: 3px;
-
+  border-radius: 30px;
   width: 100%;
   height: 100%;
   z-index: 0;
@@ -55,9 +60,10 @@ export const CardOverlay = styled.div`
 
 export const CardInfos = styled.div`
   display: flex;
+  align-items: center;
   position: relative;
   top: 0;
-  border-radius: 3px;
+  border-radius: 30px;
   line-break: anywhere;
   height: 100%;
   width: 100%;
@@ -67,10 +73,7 @@ export const CardInfos = styled.div`
 export const CardPreview = styled.div<ICard>`
   position: absolute;
   top: -100px;
-  left: ${(props) =>
-    props.xPosition && props.xPosition > 250
-      ? props.xPosition - 250
-      : props.xPosition}px;
+  left: ${(props) => (props.xPosition ? props.xPosition + 20 : 100)}px;
   z-index: 5000;
 `;
 

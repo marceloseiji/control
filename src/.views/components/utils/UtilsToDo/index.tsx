@@ -104,7 +104,7 @@ const UtilsToDo = () => {
   };
 
   return (
-    <ToDoContainer item xs={12} sm={3}>
+    <ToDoContainer item xs={12} sm={5} md={3}>
       <TitleContainer>
         <Typography variant="body2">TO DO LIST</Typography>
         <IconButton

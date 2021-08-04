@@ -35,14 +35,14 @@ const Card = ({ data, remove }: ILink) => {
   };
 
   const showPositionx = (e: any) => {
-    setXPosition(e.clientX);
+    if (e.target.tagName === "DIV") setXPosition(e.target.offsetWidth);
   };
 
   return (
     <CardContainer
       onMouseEnter={toggleShowPreview}
       onMouseLeave={toggleShowPreview}
-      onMouseOverCapture={(e) => {
+      onMouseMove={(e) => {
         showPositionx(e);
       }}
     >
@@ -53,7 +53,7 @@ const Card = ({ data, remove }: ILink) => {
             remove(data.id, user.uid);
           }}
         >
-          <Icon>delete</Icon>
+          <Icon>highlight_off</Icon>
         </IconButton>
         <a href={data.link} target="blank">
           <Typography variant="body2">{data.link}</Typography>
