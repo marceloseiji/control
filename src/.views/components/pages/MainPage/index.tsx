@@ -23,6 +23,7 @@ import NavBar from "../../global/Navbar";
 import { Drawer } from "../../global/SideBar/Drawer/styles";
 import { MainPanel } from "./MainPanel/index";
 import UtilsLinks from "../../utils/UtilsLinks";
+import UtilsNotes from "../../utils/UtilsNotes";
 import AvatarButton from "../../global/Navbar/AvatarButton";
 import UtilsToDo from "../../utils/UtilsToDo";
 import { ButtonActive } from "./ButtonActive/index";
@@ -79,6 +80,17 @@ export default function MainPage() {
           icon="link"
           text="Link"
           active={getActive("links")}
+        />
+        <ButtonActive
+          onClick={() => {
+            renderUtil({
+              element: <UtilsNotes />,
+              name: "notes",
+            });
+          }}
+          icon="edit_note"
+          text="Notes"
+          active={getActive("notes")}
         />
         <ButtonActive
           onClick={authController.logOut}
