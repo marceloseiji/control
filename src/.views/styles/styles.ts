@@ -10,4 +10,12 @@ export const RootContainer = styled.div`
 
 export const InfiniteScroll = `overflow-y: scroll;`;
 
-export const ScrollBarStyle = ``;
+export const ScrollBarStyle = `::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background-color: ${theme.palette.background.default};
+}
+::-webkit-scrollbar-thumb {
+  background-color: ${theme.palette.background.paper};
+}`;

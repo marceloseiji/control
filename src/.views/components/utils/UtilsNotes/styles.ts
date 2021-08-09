@@ -1,30 +1,23 @@
 import styled from "styled-components/macro";
 import theme from "../../../styles/theme";
 import Grid from "@material-ui/core/Grid";
-import { InfiniteScroll } from "../../../styles/styles";
+import { InfiniteScroll, ScrollBarStyle } from "../../../styles/styles";
 
 export const NotesContainer = styled(Grid)`
   padding: ${theme.spacing(0, 3, 0, 0)};
   display: inline-block;
   flex-direction: column;
   margin-bottom: ${theme.spacing(2)}px;
-  .MuiCard-root {
-    margin-top: ${theme.spacing(2)}px;
-  }
 `;
 
 export const CardsContainer = styled.div`
   ${InfiniteScroll}
+  ${ScrollBarStyle}
   max-height: 80vh;
   margin-top: ${theme.spacing(4)}px;
-  ::-webkit-scrollbar {
-    width: 5px;
-  }
-  ::-webkit-scrollbar-track {
-    background-color: ${theme.palette.background.default};
-  }
-  ::-webkit-scrollbar-thumb {
-    background-color: ${theme.palette.background.paper};
+  // Card not the first
+  span:not(:first-child) .MuiCard-root {
+    margin-top: ${theme.spacing(2)}px;
   }
 `;
 
