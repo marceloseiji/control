@@ -1,6 +1,7 @@
 import styled from "styled-components/macro";
 import theme from "../../../styles/theme";
 import Grid from "@material-ui/core/Grid";
+import { InfiniteScroll } from "../../../styles/styles";
 
 export const NotesContainer = styled(Grid)`
   padding: ${theme.spacing(0, 3, 0, 0)};
@@ -13,7 +14,18 @@ export const NotesContainer = styled(Grid)`
 `;
 
 export const CardsContainer = styled.div`
+  ${InfiniteScroll}
+  max-height: 80vh;
   margin-top: ${theme.spacing(4)}px;
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: ${theme.palette.background.default};
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: ${theme.palette.background.paper};
+  }
 `;
 
 export const FormContainer = styled.div`
