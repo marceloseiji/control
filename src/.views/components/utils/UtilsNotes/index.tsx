@@ -25,7 +25,9 @@ import {
   FormContainer,
   FormTitleContainer,
   CardsContainer,
+  FormHeader,
 } from "./styles";
+import AddButton from "../../global/AddButton";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 export interface INote {
@@ -42,6 +44,7 @@ const UtilsNotes = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [severity, setSeverity] = useState<any>();
+  const [showForm, setShowForm] = useState(false);
   const [linkListReorder, setLinkLIstReorder] = useState<any>();
   const user: any = useContext(AuthContext);
 
@@ -77,7 +80,7 @@ const UtilsNotes = () => {
   };
 
   const keyPress = (e: any) => {
-    if (e.keyCode === 13) {
+    if (e.keyCode === 13 && note.title.length > 0 && note.text.length > 0) {
       utilsNotesController
         .addNote(note, user.uid, notes)
         .then((response: any) => {
@@ -87,19 +90,32 @@ const UtilsNotes = () => {
             setMessage("LNota adicionada!");
             setSeverity("success");
             getNotes();
+            setShowForm(false);
           } else {
             setOpen(true);
             setMessage("Erro ao adicionar!");
             setSeverity("error");
           }
         });
+      setShowForm(!showForm);
       e.preventDefault();
+    }
+
+    if (e.keyCode === 13 && note.title.length <= 0) {
+      setOpen(true);
+      setMessage("Add a note title");
+      setSeverity("warning");
+    }
+
+    if (e.keyCode === 13 && note.text.length <= 0) {
+      setOpen(true);
+      setMessage("Add a text to your note");
+      setSeverity("warning");
     }
   };
 
   const reorder = (list: any, startIndex: any, endIndex: any) => {
     const result: any = Array.from(list);
-
     const dbUpdateFirst = result[startIndex];
     const dbUpdateEnd = result[endIndex];
     const noteTitleHolder = result[startIndex].title;
@@ -115,9 +131,10 @@ const UtilsNotes = () => {
     dbUpdateEnd.position = notePositionHolder;
 
     utilsNotesController.updateDnd(user.uid, dbUpdateFirst, dbUpdateEnd);
-    getNotes();
+
     const [removed]: any = result.splice(startIndex, 1);
     result.splice(endIndex, 0, removed);
+    setNotes(result);
     return result;
   };
 
@@ -127,6 +144,10 @@ const UtilsNotes = () => {
       return;
     }
     const items = reorder(notes, result.source.index, result.destination.index);
+  };
+
+  const changeButton = (buttonStatus: boolean) => {
+    return buttonStatus;
   };
 
   return (
@@ -141,27 +162,35 @@ const UtilsNotes = () => {
             sm={9}
           >
             <FormContainer>
-              <FormTitleContainer>
-                <TextField
-                  value={note.title}
-                  variant="outlined"
-                  label="Note title"
-                  onChange={(e) => {
-                    changeNoteTitle(e.target.value);
-                  }}
-                />
-              </FormTitleContainer>
-              <TextField
-                value={note.text}
-                label="Your note"
-                multiline
-                rows={4}
-                variant="outlined"
-                onChange={(e) => {
-                  chanteNoteText(e.target.value);
-                }}
-                onKeyDown={keyPress}
-              />
+              <FormHeader>
+                <Typography variant="h6">New note</Typography>
+                <AddButton show={showForm} setShow={setShowForm} />
+              </FormHeader>
+              {showForm && (
+                <>
+                  <FormTitleContainer>
+                    <TextField
+                      value={note.title}
+                      variant="outlined"
+                      label="Note title"
+                      onChange={(e) => {
+                        changeNoteTitle(e.target.value);
+                      }}
+                    />
+                  </FormTitleContainer>
+                  <TextField
+                    value={note.text}
+                    label="Your note"
+                    multiline
+                    rows={4}
+                    variant="outlined"
+                    onChange={(e) => {
+                      chanteNoteText(e.target.value);
+                    }}
+                    onKeyDown={keyPress}
+                  />
+                </>
+              )}
             </FormContainer>
             {loading && <LinearProgress />}
             <CardsContainer>

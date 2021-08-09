@@ -17,13 +17,21 @@ export const CardsContainer = styled.div`
 `;
 
 export const FormContainer = styled.div`
-  margin-top: ${theme.spacing(4)}px;
+  margin-top: ${theme.spacing(3)}px;
   .MuiFormControl-root {
     width: 100%;
   }
   .MuiButtonBase-root {
     margin-top: ${theme.spacing(1)}px;
   }
+  .MuiTypography-h6 {
+    color: ${theme.palette.primary.main};
+  }
+`;
+
+export const FormHeader = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 export const FormTitleContainer = styled.div`
