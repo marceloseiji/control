@@ -2,6 +2,7 @@ import styled from "styled-components/macro"
 import theme from "../../../styles/theme"
 import Grid from "@material-ui/core/Grid"
 import { InfiniteScroll, ScrollBarStyle } from "../../../styles/styles"
+import { Skeleton } from "@material-ui/lab"
 
 export const NotesContainer = styled(Grid)`
   padding: ${theme.spacing(0, 3, 0, 0)};
@@ -18,6 +19,25 @@ export const CardsContainer = styled.div`
   // Card not the first
   span:not(:first-child) .MuiCard-root {
     margin-top: ${theme.spacing(2)}px;
+  }
+`
+
+export const SkeletonContainer = styled.div`
+  padding: ${theme.spacing(2)}px;
+  background-color: ${theme.palette.background.paper};
+  border-radius: 3px;
+  border: 1px solid ${theme.palette.grey[800]};
+`
+
+export const SqueletonText = styled.div`
+  margin-top: ${theme.spacing(3)}px;
+`
+
+export const SqueletonButtons = styled.div`
+  display: flex;
+  margin-top: ${theme.spacing(2)}px;
+  span {
+    margin-right: ${theme.spacing(1)}px;
   }
 `
 

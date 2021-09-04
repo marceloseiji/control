@@ -15,6 +15,7 @@ import {
   LinearProgress,
   Button,
 } from "@material-ui/core"
+import Skeleton from "@material-ui/lab/Skeleton"
 import EventEmitter from "events"
 import AuthContext from "../../../../contexts/AuthContext"
 import GlobalContext from "../../../../contexts/GlobalContext"
@@ -27,10 +28,14 @@ import {
   FormTitleContainer,
   CardsContainer,
   FormHeader,
+  SkeletonContainer,
+  SqueletonText,
+  SqueletonButtons,
 } from "./styles"
 import AddButton from "../../global/AddButton"
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 import ConfirmDialog from "../../../components/global/ConfirmDialog"
+import NotesSkeleton from "./components/NotesSkeleton"
 
 export interface INote {
   title: string
@@ -216,8 +221,9 @@ const UtilsNotes = () => {
                 </>
               )}
             </FormContainer>
-            {loading && <LinearProgress />}
+
             <CardsContainer>
+              {loading && <NotesSkeleton />}
               {notes &&
                 notes.length > 0 &&
                 notes.map((note, index) => (
