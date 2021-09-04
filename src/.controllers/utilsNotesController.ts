@@ -44,7 +44,7 @@ const utilsNotesController = {
       .ref(`users/${uid}/notes/${id}`)
       .set(null)
       .then(() => {
-        return "Nota removido!";
+        return "Nota removida!";
       })
       .catch((error) => {
         console.log("Houve algum erro na remoção!");

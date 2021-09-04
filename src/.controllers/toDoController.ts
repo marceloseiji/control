@@ -40,7 +40,21 @@ const ToDoContainer = {
     return await res;
   },
 
-  check: async (id: string | undefined, uid: string, completed: boolean) => {
+  removeTask: async (uid: string, id: string | undefined) => {
+    let res = database
+      .ref(`users/${uid}/todos/${id}`)
+      .set(null)
+      .then((e) => {
+        return "removed";
+      })
+      .catch((error) => {
+        console.log("Some error: ", error);
+        res = error;
+      });
+    return await res;
+  },
+
+  check: async (id: string | undefined, uid: string, completed: boolean | undefined) => {
     let res = database
       .ref(`users/${uid}/todos/${id}/`)
       .update({ completed: !completed })

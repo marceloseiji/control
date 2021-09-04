@@ -5,7 +5,6 @@ import Grid from "@material-ui/core/Grid";
 import { lighten } from "@material-ui/core/styles";
 
 export const CardContainer = styled(Paper)`
-  padding: ${theme.spacing(2)}px;
   margin-bottom: ${theme.spacing(1)}px;
   background-color: ${lighten(
     `${theme.palette.background.default}`,
@@ -14,7 +13,8 @@ export const CardContainer = styled(Paper)`
   width: 100%;
 `;
 
-export const InfosContainer = styled.span`
+export const InfosContainer = styled.div`
+  padding: ${theme.spacing(2)}px;
   .MuiFormControlLabel-root {
     margin: 0;
     .MuiSwitch-root {
@@ -22,6 +22,34 @@ export const InfosContainer = styled.span`
         top: 8px;
       }
     }
+  }
+`;
+
+export const ButtonsContainer = styled.div`
+  padding: ${theme.spacing(0, 1.5, 1.5, 1.5)};
+  display: flex;
+  .MuiFormControlLabel-root {
+    margin: 0;
+    .MuiSwitch-root {
+      .MuiSwitch-switchBase {
+        top: 8px;
+      }
+    }
+  }
+`;
+
+export const RemoveBtnContainer = styled.div`
+  display: inline-flex;
+  .MuiFormControlLabel-root {
+    margin: 0;
+    .MuiSwitch-root {
+      .MuiSwitch-switchBase {
+        top: 8px;
+      }
+    }
+  }
+  .MuiButtonBase-root {
+    margin: 0;
   }
 `;
 

@@ -29,6 +29,7 @@ import {
 } from "./styles";
 import AddButton from "../../global/AddButton";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import ConfirmDialog from "../../../components/global/ConfirmDialog";
 
 export interface INote {
   title: string;
@@ -47,6 +48,9 @@ const UtilsNotes = () => {
   const [showForm, setShowForm] = useState(false);
   const [linkListReorder, setLinkLIstReorder] = useState<any>();
   const user: any = useContext(AuthContext);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [confirmRemove, setConfirmRemove] = useState(false);
+  const [removeId, setRemoveId] = useState("");
 
   useEffect(() => {
     getNotes();
@@ -60,16 +64,31 @@ const UtilsNotes = () => {
     });
   };
 
-  const removeNote = (id: string, uid: string) => {
-    utilsNotesController.removeNote(id, uid).then((res: any) => {
-      if (res) {
-        const remainingLinks = notes?.filter((note) => {
-          return note.id !== id;
-        });
-        setNotes(remainingLinks);
-      }
-    });
+  //Bloco de remocao de nota
+  const removeNote = (id: string) => {
+    setDialogOpen(true);
+    setRemoveId(id);
   };
+
+  const handleConfirmRemove = () => {
+    setConfirmRemove(true);
+  };
+
+  useEffect(() => {
+    if (confirmRemove) {
+      utilsNotesController.removeNote(removeId, user.uid).then((res: any) => {
+        if (res) {
+          const remainingNotes = notes?.filter((note) => {
+            return note.id !== removeId;
+          });
+          setNotes(remainingNotes);
+          setConfirmRemove(false);
+          setDialogOpen(false);
+        }
+      });
+    }
+  }, [confirmRemove]);
+  //Fim do bloco de remoção de nota
 
   const changeNoteTitle = (title: string) => {
     setNote({ ...note, title });
@@ -146,8 +165,8 @@ const UtilsNotes = () => {
     const items = reorder(notes, result.source.index, result.destination.index);
   };
 
-  const changeButton = (buttonStatus: boolean) => {
-    return buttonStatus;
+  const handleCloseDialog = () => {
+    setDialogOpen(false);
   };
 
   return (
@@ -218,6 +237,12 @@ const UtilsNotes = () => {
           </NotesContainer>
         )}
       </Droppable>
+      <ConfirmDialog
+        dialogOpen={dialogOpen}
+        handleConfirmRemove={handleConfirmRemove}
+        handleCloseDialog={handleCloseDialog}
+        text="CONFIRM EXCLUDE?"
+      />
     </DragDropContext>
   );
 };

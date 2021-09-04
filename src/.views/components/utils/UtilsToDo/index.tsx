@@ -38,14 +38,15 @@ import {
   DayPickerRangeController,
 } from "react-dates";
 import "react-dates/lib/css/_datepicker.css";
+import GlobalContext from "../../../../contexts/GlobalContext";
 
 interface ITask {
-  title?: string | undefined;
+  title: string | undefined;
   text?: string | undefined;
   createdDate?: any | undefined;
   endDate?: any | undefined;
   id?: string;
-  completed: boolean;
+  completed: boolean | undefined;
 }
 
 const UtilsToDo = () => {
@@ -54,12 +55,25 @@ const UtilsToDo = () => {
   const [severity, setSeverity] = useState<any>();
   const [newTaskShow, setNewTaskShow] = useState(false);
   const [focused, setFocused] = useState(false);
-  const [tasks, setTasks] = useState<ITask[]>();
+  const [tasks, setTasks] = useState<ITask[] | []>([]);
+  /*
+    const [tasks, setTasks] = useState<ITask[]>([
+    {
+      title: "",
+      text: "",
+      endDate: null,
+      createdDate: null,
+      completed: false,
+    },
+  ]);
+  */
 
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [endDate, setEndDate] = useState<any>();
   const [createdDate, setCreatedDate] = useState(moment().format("DD/MM/yyyy"));
+
+  const { snack, setSnack } = useContext(GlobalContext);
 
   const user: any = useContext(AuthContext);
 
@@ -97,8 +111,22 @@ const UtilsToDo = () => {
           setText("");
           setEndDate(null);
           setCreatedDate("");
-          setOpen(true);
-          setMessage("Task adicionada!");
+          setSnack({
+            open: true,
+            severity: "success",
+            message: "Task adicionada!",
+          });
+
+          setTasks([
+            ...tasks,
+            {
+              title: title,
+              text: text,
+              endDate: moment(endDate).format("DD/MM/yyyy"),
+              createdDate,
+              completed: false,
+            },
+          ]);
         }
       });
   };
@@ -168,11 +196,7 @@ const UtilsToDo = () => {
           </Grid>
         </Grid>
       </NewTaskContainer>
-      <SnackBar
-        openState={{ open, setOpen }}
-        message={message}
-        severity={severity}
-      />
+      <SnackBar />
       <TaskContainer>
         {tasks &&
           tasks.length > 0 &&

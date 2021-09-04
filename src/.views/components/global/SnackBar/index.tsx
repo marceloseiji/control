@@ -1,37 +1,27 @@
-import React, { useState } from "react";
-import Button from "@material-ui/core/Button";
+import React, { useState, useContext } from "react";
 import { Snackbar as SnackBarC } from "@material-ui/core";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
-import { makeStyles, Theme } from "@material-ui/core/styles";
+import { useEffect } from "react";
+import GlobalContext from "../../../../contexts/GlobalContext";
 
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
-interface ISnack {
-  openState: {
-    setOpen: Function;
-    open: boolean;
-  };
-  message: string;
-  severity: any;
-}
 
-export default function SnackBar({ openState, message, severity }: ISnack) {
+export default function SnackBar() {
+  const { snack, setSnack } = useContext(GlobalContext);
+
   const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
     if (reason === "clickaway") {
       return;
     }
-    openState.setOpen(false);
+    setSnack({ ...snack, open: false });
   };
 
   return (
-    <SnackBarC
-      open={openState.open}
-      autoHideDuration={3000}
-      onClose={handleClose}
-    >
-      <Alert onClose={handleClose} severity={severity}>
-        {message}
+    <SnackBarC open={snack.open} autoHideDuration={3000} onClose={handleClose}>
+      <Alert onClose={handleClose} severity={snack.severity}>
+        {snack.message}
       </Alert>
     </SnackBarC>
   );

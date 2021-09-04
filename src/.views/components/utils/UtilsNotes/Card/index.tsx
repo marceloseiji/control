@@ -3,8 +3,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Card } from "./styles";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
+import { IconButton } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 interface ICard {
   data: {
@@ -23,7 +24,9 @@ export default function OutlinedCard({ data, remove }: ICard) {
         <Typography color="textSecondary">{data.text}</Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Excluir nota</Button>
+        <IconButton onClick={() => remove(data.id)} size="small">
+          <DeleteIcon />
+        </IconButton>
       </CardActions>
     </Card>
   );
