@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react"
 import {
   Drawer,
   AppBar,
@@ -15,18 +15,18 @@ import {
   LinearProgress,
   Button,
   Dialog,
-} from "@material-ui/core";
-import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-import CancelIcon from "@material-ui/icons/Cancel";
-import { useTheme } from "@material-ui/core/styles";
+} from "@material-ui/core"
+import CheckCircleIcon from "@material-ui/icons/CheckCircle"
+import CancelIcon from "@material-ui/icons/Cancel"
+import { useTheme } from "@material-ui/core/styles"
 
-import { DialogContaier, ButtonsContainer } from "./styles";
+import { DialogContaier, ButtonsContainer } from "./styles"
 
 interface IDialog {
-  dialogOpen: boolean;
-  handleCloseDialog: any;
-  handleConfirmRemove: any;
-  text: string;
+  dialogOpen: boolean
+  handleCloseDialog: any
+  handleConfirmRemove: any
+  text: string
 }
 
 const ConfirmDialog = ({
@@ -35,7 +35,7 @@ const ConfirmDialog = ({
   text,
   handleConfirmRemove,
 }: IDialog) => {
-  const theme = useTheme();
+  const theme = useTheme()
 
   return (
     <Dialog open={dialogOpen} onClose={handleCloseDialog}>
@@ -57,7 +57,7 @@ const ConfirmDialog = ({
         </ButtonsContainer>
       </DialogContaier>
     </Dialog>
-  );
-};
+  )
+}
 
-export default ConfirmDialog;
+export default ConfirmDialog

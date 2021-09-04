@@ -1,18 +1,18 @@
-import React, { useState, useContext } from "react";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { AppBar, NavContainer } from "./styles";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
-import AuthContext from "../../../contexts/AuthContext";
-import AvatarButton from "./AvatarButton";
-import logo from "../../../images/Control.png";
+import React, { useState, useContext } from "react"
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
+import { AppBar, NavContainer } from "./styles"
+import Toolbar from "@material-ui/core/Toolbar"
+import Typography from "@material-ui/core/Typography"
+import IconButton from "@material-ui/core/IconButton"
+import MenuIcon from "@material-ui/icons/Menu"
+import MenuItem from "@material-ui/core/MenuItem"
+import Menu from "@material-ui/core/Menu"
+import AuthContext from "../../../../contexts/AuthContext"
+import AvatarButton from "./AvatarButton"
+import logo from "../../../images/Control.png"
 
 interface IUtils {
-  utilName: String;
+  utilName: String
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -27,31 +27,31 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
     },
   })
-);
+)
 
 export default function NavBar({ utilName }: IUtils) {
-  const classes = useStyles();
-  const [auth, setAuth] = React.useState(true);
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const classes = useStyles()
+  const [auth, setAuth] = React.useState(true)
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
 
   let user: any = {
     displayName: "",
     photoURL: "",
-  };
-  user = useContext(AuthContext);
-  const open = Boolean(anchorEl);
+  }
+  user = useContext(AuthContext)
+  const open = Boolean(anchorEl)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAuth(event.target.checked);
-  };
+    setAuth(event.target.checked)
+  }
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+    setAnchorEl(event.currentTarget)
+  }
 
   const handleClose = () => {
-    setAnchorEl(null);
-  };
+    setAnchorEl(null)
+  }
 
   return (
     <AppBar position="static">
@@ -96,5 +96,5 @@ export default function NavBar({ utilName }: IUtils) {
         )}
       </Toolbar>
     </AppBar>
-  );
+  )
 }

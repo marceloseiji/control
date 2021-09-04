@@ -1,6 +1,6 @@
-import styled from "styled-components/macro";
-import { IconButton as IconButtonS } from "@material-ui/core";
-import theme from "../../../styles/theme";
+import styled from "styled-components/macro"
+import { IconButton as IconButtonS } from "@material-ui/core"
+import theme from "../../../styles/theme"
 
 export const IconButton = styled(IconButtonS)`
   padding: 0 !important;
@@ -11,4 +11,4 @@ export const IconButton = styled(IconButtonS)`
       color: ${theme.palette.primary.main};
     }
   }
-`;
+`

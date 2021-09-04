@@ -1,56 +1,51 @@
-import React, { useContext, useState } from "react";
-import {
-  Icon,
-  IconButton,
-  Typography,
-  CircularProgress,
-} from "@material-ui/core";
-import AuthContext from "../../../../contexts/AuthContext";
+import React, { useContext, useState } from "react"
+import { Icon, IconButton, Typography, CircularProgress } from "@material-ui/core"
+import AuthContext from "../../../../../contexts/AuthContext"
 import {
   CardContainer,
   CardOverlay,
   CardInfos,
   CardPreview,
   PreviewLoader,
-} from "./styles";
-import { LinkPreview } from "@dhaiwat10/react-link-preview";
+} from "./styles"
+import { LinkPreview } from "@dhaiwat10/react-link-preview"
 
 interface ILink {
   data: {
-    link: string;
-    position: number;
-    id: string;
-    uid: string;
-  };
-  remove: Function;
+    link: string
+    position: number
+    id: string
+    uid: string
+  }
+  remove: Function
 }
 
 const Card = ({ data, remove }: ILink) => {
-  const user: any = useContext(AuthContext);
-  const [showPreview, setShowPreview] = useState(false);
-  const [xPosition, setXPosition] = useState<number>();
+  const user: any = useContext(AuthContext)
+  const [showPreview, setShowPreview] = useState(false)
+  const [xPosition, setXPosition] = useState<number>()
 
   const toggleShowPreview = () => {
-    setShowPreview(!showPreview);
-  };
+    setShowPreview(!showPreview)
+  }
 
   const showPositionx = (e: any) => {
-    if (e.target.tagName === "DIV") setXPosition(e.target.offsetWidth);
-  };
+    if (e.target.tagName === "DIV") setXPosition(e.target.offsetWidth)
+  }
 
   return (
     <CardContainer
       onMouseEnter={toggleShowPreview}
       onMouseLeave={toggleShowPreview}
       onMouseMove={(e) => {
-        showPositionx(e);
+        showPositionx(e)
       }}
     >
       <CardInfos>
         <IconButton
           aria-label="delete"
           onClick={() => {
-            remove(data.id, user.uid);
+            remove(data.id, user.uid)
           }}
         >
           <Icon>highlight_off</Icon>
@@ -75,7 +70,7 @@ const Card = ({ data, remove }: ILink) => {
         </CardPreview>
       )}
     </CardContainer>
-  );
-};
+  )
+}
 
-export default Card;
+export default Card

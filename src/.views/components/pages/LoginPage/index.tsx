@@ -1,10 +1,10 @@
-import React from "react";
+import React from "react"
 
-import LoginContainer from "./LoginContainer";
-import Paper from "./Paper";
+import LoginContainer from "./LoginContainer"
+import Paper from "./Paper"
 
-import { Typography, Button } from "@material-ui/core";
-import authController from "../../../../.controllers/authController";
+import { Typography, Button } from "@material-ui/core"
+import authController from "../../../../.controllers/authController"
 
 const LoginPage = () => {
   return (
@@ -13,12 +13,16 @@ const LoginPage = () => {
         <Typography variant="h6" style={{ marginBottom: "15px" }}>
           Login to your account
         </Typography>
-        <Button variant="outlined" color="primary" onClick={authController.startLogin}>
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={authController.startLogin}
+        >
           Google Login
         </Button>
       </Paper>
     </LoginContainer>
-  );
-};
+  )
+}
 
-export default LoginPage;
+export default LoginPage

@@ -1,5 +1,5 @@
-import styled from "styled-components/macro";
-import theme from "../../../styles/theme";
+import styled from "styled-components/macro"
+import theme from "../../../styles/theme"
 
 const LoginContainer = styled.div`
   background-color: ${theme.palette.background.default};
@@ -7,6 +7,6 @@ const LoginContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
+`
 
-export default LoginContainer;
+export default LoginContainer

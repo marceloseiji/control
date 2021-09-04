@@ -1,10 +1,10 @@
-import styled from "styled-components/macro";
-import theme from "../../../styles/theme";
-import { Paper } from "@material-ui/core";
-import Grid from "@material-ui/core/Grid";
+import styled from "styled-components/macro"
+import theme from "../../../styles/theme"
+import { Paper } from "@material-ui/core"
+import Grid from "@material-ui/core/Grid"
 
 interface INewTask {
-  newTaskShow?: boolean;
+  newTaskShow?: boolean
 }
 
 export const ToDoContainer = styled(Grid)`
@@ -19,7 +19,7 @@ export const ToDoContainer = styled(Grid)`
   p {
     color: ${theme.palette.primary.main};
   }
-`;
+`
 
 export const TaskContainer = styled.div`
   align-items: center;
@@ -35,7 +35,7 @@ export const TaskContainer = styled.div`
   .MuiGrid-root {
     margin: ${theme.spacing(1, 0)};
   }
-`;
+`
 
 export const NewTaskContainer = styled.div<INewTask>`
   align-items: center;
@@ -56,7 +56,7 @@ export const NewTaskContainer = styled.div<INewTask>`
   .MuiGrid-root {
     margin: ${theme.spacing(1, 0)};
   }
-`;
+`
 
 export const TitleContainer = styled.div`
   align-items: center;
@@ -70,7 +70,7 @@ export const TitleContainer = styled.div`
   .MuiGrid-root {
     margin: ${theme.spacing(1, 0)};
   }
-`;
+`
 
 export const DatePickerContainer = styled(Grid)`
   display: flex;
@@ -108,7 +108,7 @@ export const DatePickerContainer = styled(Grid)`
   span {
     color: white;
   }
-`;
+`
 
 export const Title = styled.div`
   display: flex;
@@ -120,4 +120,4 @@ export const Title = styled.div`
       color: ${theme.palette.primary.main};
     }
   }
-`;
+`

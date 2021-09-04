@@ -1,5 +1,5 @@
-import React from "react";
-import { Router, Route } from "react-router-dom";
+import React from "react"
+import { Router, Route } from "react-router-dom"
 import UtilsLinks from "../utils/UtilsLinks"
 
 const MainRouter = ({ history }: any) => {
@@ -8,7 +8,7 @@ const MainRouter = ({ history }: any) => {
       <Route path="/links" component={UtilsLinks} />
       <Route path="/systems" />
     </Router>
-  );
-};
+  )
+}
 
-export default MainRouter;
+export default MainRouter

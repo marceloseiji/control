@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { MouseEventHandler } from "react";
-import { Typography, Icon } from "@material-ui/core";
-import { useTheme } from "@material-ui/core/styles";
-import { ButtonActiveS } from "./styles";
+import React, { useState } from "react"
+import { MouseEventHandler } from "react"
+import { Typography, Icon } from "@material-ui/core"
+import { useTheme } from "@material-ui/core/styles"
+import { ButtonActiveS } from "./styles"
 
 interface IButtonActive {
-  active?: boolean;
-  text?: string;
-  onClick?: MouseEventHandler<HTMLAnchorElement>;
-  href?: string;
-  children?: any;
-  icon?: string;
+  active?: boolean
+  text?: string
+  onClick?: MouseEventHandler<HTMLAnchorElement>
+  href?: string
+  children?: any
+  icon?: string
 }
 
 export const ButtonActive = ({
@@ -20,7 +20,7 @@ export const ButtonActive = ({
   href,
   icon,
 }: IButtonActive) => {
-  const theme = useTheme();
+  const theme = useTheme()
 
   return (
     <>
@@ -33,5 +33,5 @@ export const ButtonActive = ({
         <Typography variant="subtitle2">{text}</Typography>
       </ButtonActiveS>
     </>
-  );
-};
+  )
+}

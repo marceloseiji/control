@@ -1,5 +1,5 @@
-import { firebase, googleAuthProvider, database } from "../.models/firebase";
-import { INote } from "../.views/components/utils/UtilsNotes/index";
+import { firebase, googleAuthProvider, database } from "../.models/firebase"
+import { INote } from "../.views/components/utils/UtilsNotes/index"
 
 const utilsNotesController = {
   getAllNotes: async (uid: string) => {
@@ -8,18 +8,18 @@ const utilsNotesController = {
       .orderByChild("position")
       .once("value")
       .then((snapshot) => {
-        const notes: any = [];
+        const notes: any = []
         snapshot.forEach((note) => {
           notes.push({
             id: note.key,
             title: note.val().title,
             text: note.val().text,
             position: note.val().position,
-          });
-        });
-        return notes;
-      });
-    return await notes;
+          })
+        })
+        return notes
+      })
+    return await notes
   },
 
   addNote: async (note: INote, uid: string, notes: any[]) => {
@@ -30,13 +30,13 @@ const utilsNotesController = {
         position: notes.length > 0 ? notes[notes.length - 1].position + 1 : 0,
       })
       .then((e) => {
-        return e;
+        return e
       })
       .catch((error) => {
-        console.log("link não adicionado: ", error);
-        res = error;
-      });
-    return await res;
+        console.log("link não adicionado: ", error)
+        res = error
+      })
+    return await res
   },
 
   removeNote: async (id: string, uid: string) => {
@@ -44,13 +44,13 @@ const utilsNotesController = {
       .ref(`users/${uid}/notes/${id}`)
       .set(null)
       .then(() => {
-        return "Nota removida!";
+        return "Nota removida!"
       })
       .catch((error) => {
-        console.log("Houve algum erro na remoção!");
-        res = error;
-      });
-    return await res;
+        console.log("Houve algum erro na remoção!")
+        res = error
+      })
+    return await res
   },
 
   updateDnd: async (uid: string, first: any, end: any) => {
@@ -58,16 +58,16 @@ const utilsNotesController = {
       .ref(`users/${uid}/notes/${first.id}`)
       .update({ position: first.position })
       .catch((error) => {
-        console.log("Houve algum erro na atualização!");
-      });
+        console.log("Houve algum erro na atualização!")
+      })
 
     database
       .ref(`users/${uid}/notes/${end.id}`)
       .update({ position: end.position })
       .catch((error) => {
-        console.log("Houve algum erro na atualização!");
-      });
+        console.log("Houve algum erro na atualização!")
+      })
   },
-};
+}
 
-export default utilsNotesController;
+export default utilsNotesController

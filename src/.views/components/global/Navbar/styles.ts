@@ -1,7 +1,7 @@
-import styled from "styled-components/macro";
-import { AppBar as AppBarS } from "@material-ui/core";
-import { IconButton as IconButtonS } from "@material-ui/core";
-import theme from "../../../styles/theme";
+import styled from "styled-components/macro"
+import { AppBar as AppBarS } from "@material-ui/core"
+import { IconButton as IconButtonS } from "@material-ui/core"
+import theme from "../../../styles/theme"
 
 export const AppBar = styled(AppBarS)`
   background-color: ${theme.palette.background.paper} !important;
@@ -14,16 +14,16 @@ export const AppBar = styled(AppBarS)`
       ? theme.palette.primary.main
       : theme.palette.grey[800]};
   }
-`;
+`
 
 export const IconButton = styled(IconButtonS)`
   padding: 0;
   &:hover {
     background-color: transparent;
   }
-`;
+`
 
-export const  NavContainer = styled.div`
+export const NavContainer = styled.div`
   display: flex;
   align-items: center;
-`;
+`

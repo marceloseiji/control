@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
-import { ListItemText, Tooltip, Avatar } from "@material-ui/core";
-import { IconButton } from "../styles";
+import React, { useState } from "react"
+import { useLocation } from "react-router-dom"
+import { ListItemText, Tooltip, Avatar } from "@material-ui/core"
+import { IconButton } from "../styles"
 
 interface IMainButton {
-  text?: string;
-  icon?: any;
-  className?: string;
-  onClick: any;
-  photoURL: string;
-  displayName?: string;
+  text?: string
+  icon?: any
+  className?: string
+  onClick: any
+  photoURL: string
+  displayName?: string
 }
 
 const AvatarButton = ({
@@ -26,7 +26,7 @@ const AvatarButton = ({
         <ListItemText primary={text} />
       </IconButton>
     </Tooltip>
-  );
-};
+  )
+}
 
-export default AvatarButton;
+export default AvatarButton

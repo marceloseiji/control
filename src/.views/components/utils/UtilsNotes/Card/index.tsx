@@ -1,19 +1,19 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { Card } from "./styles";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import { IconButton } from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
-import DeleteIcon from "@material-ui/icons/Delete";
+import React from "react"
+import { makeStyles } from "@material-ui/core/styles"
+import { Card } from "./styles"
+import CardActions from "@material-ui/core/CardActions"
+import CardContent from "@material-ui/core/CardContent"
+import { IconButton } from "@material-ui/core"
+import Typography from "@material-ui/core/Typography"
+import DeleteIcon from "@material-ui/icons/Delete"
 
 interface ICard {
   data: {
-    id: string;
-    text: string;
-    title: string;
-  };
-  remove: Function;
+    id: string
+    text: string
+    title: string
+  }
+  remove: Function
 }
 
 export default function OutlinedCard({ data, remove }: ICard) {
@@ -29,5 +29,5 @@ export default function OutlinedCard({ data, remove }: ICard) {
         </IconButton>
       </CardActions>
     </Card>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react"
 import {
   Drawer,
   AppBar,
@@ -14,160 +14,165 @@ import {
   TextField,
   LinearProgress,
   Button,
-} from "@material-ui/core";
-import EventEmitter from "events";
-import AuthContext from "../../../contexts/AuthContext";
-import utilsNotesController from "../../../../.controllers/utilsNotesController";
-import SnackBar from "../../../components/global/SnackBar";
-import Card from "./Card";
+} from "@material-ui/core"
+import EventEmitter from "events"
+import AuthContext from "../../../../contexts/AuthContext"
+import GlobalContext from "../../../../contexts/GlobalContext"
+import utilsNotesController from "../../../../.controllers/utilsNotesController"
+import SnackBar from "../../../components/global/SnackBar"
+import Card from "./Card"
 import {
   NotesContainer,
   FormContainer,
   FormTitleContainer,
   CardsContainer,
   FormHeader,
-} from "./styles";
-import AddButton from "../../global/AddButton";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import ConfirmDialog from "../../../components/global/ConfirmDialog";
+} from "./styles"
+import AddButton from "../../global/AddButton"
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
+import ConfirmDialog from "../../../components/global/ConfirmDialog"
 
 export interface INote {
-  title: string;
-  text: string;
-  id: string;
-  remove?: any;
+  title: string
+  text: string
+  id: string
+  remove?: any
 }
 
 const UtilsNotes = () => {
-  const [notes, setNotes] = useState<INote[]>([]);
-  const [note, setNote] = useState<INote>({ title: "", text: "", id: "" });
-  const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
-  const [severity, setSeverity] = useState<any>();
-  const [showForm, setShowForm] = useState(false);
-  const [linkListReorder, setLinkLIstReorder] = useState<any>();
-  const user: any = useContext(AuthContext);
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const [confirmRemove, setConfirmRemove] = useState(false);
-  const [removeId, setRemoveId] = useState("");
+  const [notes, setNotes] = useState<INote[]>([])
+  const [note, setNote] = useState<INote>({ title: "", text: "", id: "" })
+  const [loading, setLoading] = useState(false)
+  const [showForm, setShowForm] = useState(false)
+  const [dialogOpen, setDialogOpen] = useState(false)
+  const [confirmRemove, setConfirmRemove] = useState(false)
+  const [removeId, setRemoveId] = useState("")
+  const user: any = useContext(AuthContext)
+
+  const { snack, setSnack } = useContext(GlobalContext)
 
   useEffect(() => {
-    getNotes();
-  }, []);
+    getNotes()
+  }, [])
 
   const getNotes = () => {
-    setLoading(true);
+    setLoading(true)
     utilsNotesController.getAllNotes(user.uid).then((res: any) => {
-      setNotes(res);
-      setLoading(false);
-    });
-  };
+      setNotes(res)
+      setLoading(false)
+    })
+  }
 
   //Bloco de remocao de nota
   const removeNote = (id: string) => {
-    setDialogOpen(true);
-    setRemoveId(id);
-  };
+    setDialogOpen(true)
+    setRemoveId(id)
+  }
 
   const handleConfirmRemove = () => {
-    setConfirmRemove(true);
-  };
+    setConfirmRemove(true)
+  }
 
   useEffect(() => {
     if (confirmRemove) {
       utilsNotesController.removeNote(removeId, user.uid).then((res: any) => {
         if (res) {
           const remainingNotes = notes?.filter((note) => {
-            return note.id !== removeId;
-          });
-          setNotes(remainingNotes);
-          setConfirmRemove(false);
-          setDialogOpen(false);
+            return note.id !== removeId
+          })
+          setNotes(remainingNotes)
+          setConfirmRemove(false)
+          setDialogOpen(false)
         }
-      });
+      })
     }
-  }, [confirmRemove]);
+  }, [confirmRemove])
   //Fim do bloco de remoção de nota
 
   const changeNoteTitle = (title: string) => {
-    setNote({ ...note, title });
-  };
+    setNote({ ...note, title })
+  }
 
   const chanteNoteText = (text: string) => {
-    setNote({ ...note, text });
-  };
+    setNote({ ...note, text })
+  }
 
   const keyPress = (e: any) => {
     if (e.keyCode === 13 && note.title.length > 0 && note.text.length > 0) {
-      utilsNotesController
-        .addNote(note, user.uid, notes)
-        .then((response: any) => {
-          if (response && response.key) {
-            setNote({ title: "", text: "", id: "" });
-            setOpen(true);
-            setMessage("LNota adicionada!");
-            setSeverity("success");
-            getNotes();
-            setShowForm(false);
-          } else {
-            setOpen(true);
-            setMessage("Erro ao adicionar!");
-            setSeverity("error");
-          }
-        });
-      setShowForm(!showForm);
-      e.preventDefault();
+      utilsNotesController.addNote(note, user.uid, notes).then((response: any) => {
+        if (response && response.key) {
+          setNote({ title: "", text: "", id: "" })
+          setSnack({
+            open: true,
+            severity: "success",
+            message: "Nota adicionada!",
+          })
+          getNotes()
+          setShowForm(false)
+        } else {
+          setSnack({
+            open: true,
+            severity: "error",
+            message: "Erro ao adicionar!",
+          })
+        }
+      })
+      setShowForm(!showForm)
+      e.preventDefault()
     }
 
     if (e.keyCode === 13 && note.title.length <= 0) {
-      setOpen(true);
-      setMessage("Add a note title");
-      setSeverity("warning");
+      setSnack({
+        open: true,
+        severity: "warning",
+        message: "Add a note title",
+      })
     }
 
     if (e.keyCode === 13 && note.text.length <= 0) {
-      setOpen(true);
-      setMessage("Add a text to your note");
-      setSeverity("warning");
+      setSnack({
+        open: true,
+        severity: "warning",
+        message: "Add a text to your note",
+      })
     }
-  };
+  }
 
   const reorder = (list: any, startIndex: any, endIndex: any) => {
-    const result: any = Array.from(list);
-    const dbUpdateFirst = result[startIndex];
-    const dbUpdateEnd = result[endIndex];
-    const noteTitleHolder = result[startIndex].title;
-    const noteTextHolder = result[startIndex].text;
-    const notePositionHolder = result[startIndex].position;
+    const result: any = Array.from(list)
+    const dbUpdateFirst = result[startIndex]
+    const dbUpdateEnd = result[endIndex]
+    const noteTitleHolder = result[startIndex].title
+    const noteTextHolder = result[startIndex].text
+    const notePositionHolder = result[startIndex].position
 
     // dbUpdateFirst.title = result[endIndex].title;
     // dbUpdateFirst.text = result[endIndex].text;
-    dbUpdateFirst.position = result[endIndex].position;
+    dbUpdateFirst.position = result[endIndex].position
 
     // dbUpdateEnd.title = noteTitleHolder;
     // dbUpdateEnd.text = noteTextHolder;
-    dbUpdateEnd.position = notePositionHolder;
+    dbUpdateEnd.position = notePositionHolder
 
-    utilsNotesController.updateDnd(user.uid, dbUpdateFirst, dbUpdateEnd);
+    utilsNotesController.updateDnd(user.uid, dbUpdateFirst, dbUpdateEnd)
 
-    const [removed]: any = result.splice(startIndex, 1);
-    result.splice(endIndex, 0, removed);
-    setNotes(result);
-    return result;
-  };
+    const [removed]: any = result.splice(startIndex, 1)
+    result.splice(endIndex, 0, removed)
+    setNotes(result)
+    return result
+  }
 
   const onDragEnd = (result: any) => {
     // dropped outside the list
     if (!result.destination) {
-      return;
+      return
     }
-    const items = reorder(notes, result.source.index, result.destination.index);
-  };
+    const items = reorder(notes, result.source.index, result.destination.index)
+  }
 
   const handleCloseDialog = () => {
-    setDialogOpen(false);
-  };
+    setDialogOpen(false)
+  }
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -193,7 +198,7 @@ const UtilsNotes = () => {
                       variant="outlined"
                       label="Note title"
                       onChange={(e) => {
-                        changeNoteTitle(e.target.value);
+                        changeNoteTitle(e.target.value)
                       }}
                     />
                   </FormTitleContainer>
@@ -204,7 +209,7 @@ const UtilsNotes = () => {
                     rows={4}
                     variant="outlined"
                     onChange={(e) => {
-                      chanteNoteText(e.target.value);
+                      chanteNoteText(e.target.value)
                     }}
                     onKeyDown={keyPress}
                   />
@@ -229,11 +234,7 @@ const UtilsNotes = () => {
                   </Draggable>
                 ))}
             </CardsContainer>
-            <SnackBar
-              openState={{ open, setOpen }}
-              message={message}
-              severity={severity}
-            />
+            <SnackBar />
           </NotesContainer>
         )}
       </Droppable>
@@ -244,7 +245,7 @@ const UtilsNotes = () => {
         text="CONFIRM EXCLUDE?"
       />
     </DragDropContext>
-  );
-};
+  )
+}
 
-export default UtilsNotes;
+export default UtilsNotes

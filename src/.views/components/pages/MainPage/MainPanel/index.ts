@@ -1,6 +1,6 @@
-import styled from "styled-components/macro";
-import theme from "../../../../styles/theme";
-import Grid from '@material-ui/core/Grid';
+import styled from "styled-components/macro"
+import theme from "../../../../styles/theme"
+import Grid from "@material-ui/core/Grid"
 
 export const MainPanel = styled(Grid)`
   background-color: ${theme.palette.background.default};
@@ -10,4 +10,4 @@ export const MainPanel = styled(Grid)`
   flex: 1;
   width: auto !important;
   justify-content: space-between;
-`;
+`

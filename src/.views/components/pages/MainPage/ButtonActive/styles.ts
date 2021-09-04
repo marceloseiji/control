@@ -1,5 +1,5 @@
-import styled from "styled-components/macro";
-import theme from "../../../../styles/theme";
+import styled from "styled-components/macro"
+import theme from "../../../../styles/theme"
 
 export const ButtonActiveS = styled.a`
   align-items: center;
@@ -19,4 +19,4 @@ export const ButtonActiveS = styled.a`
     margin-left: ${theme.spacing(1.5)}px;
     transition: 0.1s ease;
   }
-`;
+`

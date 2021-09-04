@@ -1,4 +1,4 @@
-import { firebase, googleAuthProvider, database } from "../.models/firebase";
+import { firebase, googleAuthProvider, database } from "../.models/firebase"
 
 const authController = {
   startLogin: async () => {
@@ -6,15 +6,15 @@ const authController = {
       .auth()
       .signInWithPopup(googleAuthProvider)
       .then((result) => {
-        return result;
+        return result
       })
       .catch((error) => {
-        console.log("Erro!: ", error);
-      });
+        console.log("Erro!: ", error)
+      })
   },
   logOut: async () => {
-    return firebase.auth().signOut();
+    return firebase.auth().signOut()
   },
-};
+}
 
-export default authController;
+export default authController

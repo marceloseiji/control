@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -21,6 +17,12 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
-, "src/.models/firebase", "src/.views/components", "src/.controllers/providers", "src/.views/styles", "src/.controllers/authController.ts", "src/.models/index.ts"  ]
+    "src",
+    "src/.models/firebase",
+    "src/.views/components",
+    "src/.controllers/providers",
+    "src/.views/styles",
+    "src/.controllers/authController.ts",
+    "src/.models/index.ts"
+  ]
 }

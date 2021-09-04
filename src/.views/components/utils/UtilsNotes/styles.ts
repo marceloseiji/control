@@ -1,14 +1,14 @@
-import styled from "styled-components/macro";
-import theme from "../../../styles/theme";
-import Grid from "@material-ui/core/Grid";
-import { InfiniteScroll, ScrollBarStyle } from "../../../styles/styles";
+import styled from "styled-components/macro"
+import theme from "../../../styles/theme"
+import Grid from "@material-ui/core/Grid"
+import { InfiniteScroll, ScrollBarStyle } from "../../../styles/styles"
 
 export const NotesContainer = styled(Grid)`
   padding: ${theme.spacing(0, 3, 0, 0)};
   display: inline-block;
   flex-direction: column;
   margin-bottom: ${theme.spacing(2)}px;
-`;
+`
 
 export const CardsContainer = styled.div`
   ${InfiniteScroll}
@@ -19,7 +19,7 @@ export const CardsContainer = styled.div`
   span:not(:first-child) .MuiCard-root {
     margin-top: ${theme.spacing(2)}px;
   }
-`;
+`
 
 export const FormContainer = styled.div`
   margin-top: ${theme.spacing(3)}px;
@@ -32,13 +32,13 @@ export const FormContainer = styled.div`
   .MuiTypography-h6 {
     color: ${theme.palette.primary.main};
   }
-`;
+`
 
 export const FormHeader = styled.div`
   display: flex;
   align-items: center;
-`;
+`
 
 export const FormTitleContainer = styled.div`
   margin-bottom: ${theme.spacing(1)}px;
-`;
+`

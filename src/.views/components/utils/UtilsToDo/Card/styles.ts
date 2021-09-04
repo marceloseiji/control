@@ -1,8 +1,8 @@
-import styled from "styled-components/macro";
-import theme from "../../../../styles/theme";
-import { Paper, IconButton } from "@material-ui/core";
-import Grid from "@material-ui/core/Grid";
-import { lighten } from "@material-ui/core/styles";
+import styled from "styled-components/macro"
+import theme from "../../../../styles/theme"
+import { Paper, IconButton } from "@material-ui/core"
+import Grid from "@material-ui/core/Grid"
+import { lighten } from "@material-ui/core/styles"
 
 export const CardContainer = styled(Paper)`
   margin-bottom: ${theme.spacing(1)}px;
@@ -11,7 +11,7 @@ export const CardContainer = styled(Paper)`
     0.1
   )} !important;
   width: 100%;
-`;
+`
 
 export const InfosContainer = styled.div`
   padding: ${theme.spacing(2)}px;
@@ -23,7 +23,7 @@ export const InfosContainer = styled.div`
       }
     }
   }
-`;
+`
 
 export const ButtonsContainer = styled.div`
   padding: ${theme.spacing(0, 1.5, 1.5, 1.5)};
@@ -36,7 +36,7 @@ export const ButtonsContainer = styled.div`
       }
     }
   }
-`;
+`
 
 export const RemoveBtnContainer = styled.div`
   display: inline-flex;
@@ -51,8 +51,8 @@ export const RemoveBtnContainer = styled.div`
   .MuiButtonBase-root {
     margin: 0;
   }
-`;
+`
 
-export const Done = styled(IconButton)``;
+export const Done = styled(IconButton)``
 
-export const endDate = styled.span``;
+export const endDate = styled.span``

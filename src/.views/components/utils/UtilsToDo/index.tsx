@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react"
 import {
   Drawer,
   AppBar,
@@ -16,46 +16,46 @@ import {
   TextField,
   Paper,
   Grid,
-} from "@material-ui/core";
+} from "@material-ui/core"
 import {
   ToDoContainer,
   TaskContainer,
   DatePickerContainer,
   TitleContainer,
   NewTaskContainer,
-} from "./styles";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import Card from "./Card/index";
-import AuthContext from "../../../contexts/AuthContext";
-import toDoController from "../../../../.controllers/toDoController";
-import SnackBar from "../../../components/global/SnackBar";
-import moment from "moment";
-import "react-dates/initialize";
+} from "./styles"
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
+import Card from "./Card/index"
+import AuthContext from "../../../../contexts/AuthContext"
+import toDoController from "../../../../.controllers/toDoController"
+import SnackBar from "../../../components/global/SnackBar"
+import moment from "moment"
+import "react-dates/initialize"
 import {
   DateRangePicker,
   SingleDatePicker,
   DayPickerRangeController,
-} from "react-dates";
-import "react-dates/lib/css/_datepicker.css";
-import GlobalContext from "../../../../contexts/GlobalContext";
+} from "react-dates"
+import "react-dates/lib/css/_datepicker.css"
+import GlobalContext from "../../../../contexts/GlobalContext"
 
 interface ITask {
-  title: string | undefined;
-  text?: string | undefined;
-  createdDate?: any | undefined;
-  endDate?: any | undefined;
-  id?: string;
-  completed: boolean | undefined;
+  title: string | undefined
+  text?: string | undefined
+  createdDate?: any | undefined
+  endDate?: any | undefined
+  id?: string
+  completed: boolean | undefined
 }
 
 const UtilsToDo = () => {
-  const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState("");
-  const [severity, setSeverity] = useState<any>();
-  const [newTaskShow, setNewTaskShow] = useState(false);
-  const [focused, setFocused] = useState(false);
-  const [tasks, setTasks] = useState<ITask[] | []>([]);
+  const [open, setOpen] = useState(false)
+  const [message, setMessage] = useState("")
+  const [severity, setSeverity] = useState<any>()
+  const [newTaskShow, setNewTaskShow] = useState(false)
+  const [focused, setFocused] = useState(false)
+  const [tasks, setTasks] = useState<ITask[] | []>([])
   /*
     const [tasks, setTasks] = useState<ITask[]>([
     {
@@ -68,30 +68,30 @@ const UtilsToDo = () => {
   ]);
   */
 
-  const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
-  const [endDate, setEndDate] = useState<any>();
-  const [createdDate, setCreatedDate] = useState(moment().format("DD/MM/yyyy"));
+  const [title, setTitle] = useState("")
+  const [text, setText] = useState("")
+  const [endDate, setEndDate] = useState<any>()
+  const [createdDate, setCreatedDate] = useState(moment().format("DD/MM/yyyy"))
 
-  const { snack, setSnack } = useContext(GlobalContext);
+  const { snack, setSnack } = useContext(GlobalContext)
 
-  const user: any = useContext(AuthContext);
+  const user: any = useContext(AuthContext)
 
   const ToggleShow = () => {
-    setNewTaskShow(!newTaskShow);
-  };
+    setNewTaskShow(!newTaskShow)
+  }
 
   const loadTasks = (uid: string) => {
     toDoController.getAllTasks(uid).then((res) => {
-      setTasks(res);
-    });
-  };
+      setTasks(res)
+    })
+  }
 
   useEffect(() => {
     if (user && user.uid) {
-      loadTasks(user.uid);
+      loadTasks(user.uid)
     }
-  }, [user]);
+  }, [user])
 
   const saveTask = () => {
     toDoController
@@ -106,16 +106,16 @@ const UtilsToDo = () => {
       )
       .then((response) => {
         if (response) {
-          ToggleShow();
-          setTitle("");
-          setText("");
-          setEndDate(null);
-          setCreatedDate("");
+          ToggleShow()
+          setTitle("")
+          setText("")
+          setEndDate(null)
+          setCreatedDate("")
           setSnack({
             open: true,
             severity: "success",
             message: "Task adicionada!",
-          });
+          })
 
           setTasks([
             ...tasks,
@@ -126,10 +126,10 @@ const UtilsToDo = () => {
               createdDate,
               completed: false,
             },
-          ]);
+          ])
         }
-      });
-  };
+      })
+  }
 
   return (
     <ToDoContainer item xs={12} sm={5} md={3}>
@@ -137,7 +137,7 @@ const UtilsToDo = () => {
         <Typography variant="body2">TO DO LIST</Typography>
         <IconButton
           onClick={() => {
-            ToggleShow();
+            ToggleShow()
           }}
         >
           {!newTaskShow && <Icon>add_circle</Icon>}
@@ -153,7 +153,7 @@ const UtilsToDo = () => {
               label="Task Title"
               fullWidth
               onChange={(e) => {
-                setTitle(e.target.value);
+                setTitle(e.target.value)
               }}
             />
           </Grid>
@@ -167,7 +167,7 @@ const UtilsToDo = () => {
               variant="outlined"
               fullWidth
               onChange={(e) => {
-                setText(e.target.value);
+                setText(e.target.value)
               }}
             />
           </Grid>
@@ -213,11 +213,11 @@ const UtilsToDo = () => {
                 tasks={tasks}
                 setTasks={setTasks}
               />
-            );
+            )
           })}
       </TaskContainer>
     </ToDoContainer>
-  );
-};
+  )
+}
 
-export default UtilsToDo;
+export default UtilsToDo

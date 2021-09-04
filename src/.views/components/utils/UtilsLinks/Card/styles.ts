@@ -1,9 +1,9 @@
-import styled from "styled-components/macro";
-import theme from "../../../../styles/theme";
-import { Paper } from "@material-ui/core";
+import styled from "styled-components/macro"
+import theme from "../../../../styles/theme"
+import { Paper } from "@material-ui/core"
 
 interface ICard {
-  xPosition?: number;
+  xPosition?: number
 }
 
 export const CardContainer = styled.div`
@@ -44,7 +44,7 @@ export const CardContainer = styled.div`
       background-color: transparent;
     }
   }
-`;
+`
 
 export const CardOverlay = styled.div`
   background-color: ${theme.palette.background.paper};
@@ -56,7 +56,7 @@ export const CardOverlay = styled.div`
   height: 100%;
   z-index: 0;
   transition: 0.3s ease;
-`;
+`
 
 export const CardInfos = styled.div`
   display: flex;
@@ -68,14 +68,14 @@ export const CardInfos = styled.div`
   height: 100%;
   width: 100%;
   z-index: 1;
-`;
+`
 
 export const CardPreview = styled.div<ICard>`
   position: absolute;
   top: -100px;
   left: ${(props) => (props.xPosition ? props.xPosition + 20 : 100)}px;
   z-index: 5000;
-`;
+`
 
 export const PreviewLoader = styled.div`
   position: absolute;
@@ -83,4 +83,4 @@ export const PreviewLoader = styled.div`
   left: 100px;
   width: 100px;
   height: 100px;
-`;
+`

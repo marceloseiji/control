@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from "styled-components"
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -9,6 +9,6 @@ const GlobalStyle = createGlobalStyle`
   html, body, #root {
     height: 100%;
   }
-`;
+`
 
-export default GlobalStyle;
+export default GlobalStyle
