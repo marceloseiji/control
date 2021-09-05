@@ -53,6 +53,20 @@ const utilsNotesController = {
     return await res
   },
 
+  editNote: async (note: INote, id: string, uid: string) => {
+    let res = database
+      .ref(`users/${uid}/notes/${id}`)
+      .update(note)
+      .then(() => {
+        return "Nota atualizada!"
+      })
+      .catch((error) => {
+        console.log("Houve algum erro na atualização!")
+        res = error
+      })
+    return await res
+  },
+
   updateDnd: async (uid: string, first: any, end: any) => {
     database
       .ref(`users/${uid}/notes/${first.id}`)

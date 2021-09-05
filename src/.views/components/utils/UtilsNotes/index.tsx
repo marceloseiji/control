@@ -35,13 +35,12 @@ import {
 import AddButton from "../../global/AddButton"
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 import ConfirmDialog from "../../../components/global/ConfirmDialog"
-import NotesSkeleton from "./components/NotesSkeleton"
+import NotesSkeleton from "./NotesSkeleton"
 
 export interface INote {
   title: string
   text: string
   id: string
-  remove?: any
 }
 
 const UtilsNotes = () => {
@@ -49,9 +48,6 @@ const UtilsNotes = () => {
   const [note, setNote] = useState<INote>({ title: "", text: "", id: "" })
   const [loading, setLoading] = useState(false)
   const [showForm, setShowForm] = useState(false)
-  const [dialogOpen, setDialogOpen] = useState(false)
-  const [confirmRemove, setConfirmRemove] = useState(false)
-  const [removeId, setRemoveId] = useState("")
   const user: any = useContext(AuthContext)
 
   const { snack, setSnack } = useContext(GlobalContext)
@@ -68,32 +64,6 @@ const UtilsNotes = () => {
     })
   }
 
-  //Bloco de remocao de nota
-  const removeNote = (id: string) => {
-    setDialogOpen(true)
-    setRemoveId(id)
-  }
-
-  const handleConfirmRemove = () => {
-    setConfirmRemove(true)
-  }
-
-  useEffect(() => {
-    if (confirmRemove) {
-      utilsNotesController.removeNote(removeId, user.uid).then((res: any) => {
-        if (res) {
-          const remainingNotes = notes?.filter((note) => {
-            return note.id !== removeId
-          })
-          setNotes(remainingNotes)
-          setConfirmRemove(false)
-          setDialogOpen(false)
-        }
-      })
-    }
-  }, [confirmRemove])
-  //Fim do bloco de remoção de nota
-
   const changeNoteTitle = (title: string) => {
     setNote({ ...note, title })
   }
@@ -103,7 +73,7 @@ const UtilsNotes = () => {
   }
 
   const keyPress = (e: any) => {
-    if (e.keyCode === 13 && note.title.length > 0 && note.text.length > 0) {
+    if (e.keyCode === 13 && note?.title?.length > 0 && note?.text?.length > 0) {
       utilsNotesController.addNote(note, user.uid, notes).then((response: any) => {
         if (response && response.key) {
           setNote({ title: "", text: "", id: "" })
@@ -151,12 +121,7 @@ const UtilsNotes = () => {
     const noteTextHolder = result[startIndex].text
     const notePositionHolder = result[startIndex].position
 
-    // dbUpdateFirst.title = result[endIndex].title;
-    // dbUpdateFirst.text = result[endIndex].text;
     dbUpdateFirst.position = result[endIndex].position
-
-    // dbUpdateEnd.title = noteTitleHolder;
-    // dbUpdateEnd.text = noteTextHolder;
     dbUpdateEnd.position = notePositionHolder
 
     utilsNotesController.updateDnd(user.uid, dbUpdateFirst, dbUpdateEnd)
@@ -173,10 +138,6 @@ const UtilsNotes = () => {
       return
     }
     const items = reorder(notes, result.source.index, result.destination.index)
-  }
-
-  const handleCloseDialog = () => {
-    setDialogOpen(false)
   }
 
   return (
@@ -226,15 +187,15 @@ const UtilsNotes = () => {
               {loading && <NotesSkeleton />}
               {notes &&
                 notes.length > 0 &&
-                notes.map((note, index) => (
-                  <Draggable key={note.id} draggableId={note.id} index={index}>
+                notes.map((note: INote, index) => (
+                  <Draggable key={note.id} draggableId={note?.id} index={index}>
                     {(provided, snapshot) => (
                       <span
                         ref={provided.innerRef}
                         {...provided.dragHandleProps}
                         {...provided.draggableProps}
                       >
-                        <Card data={note} remove={removeNote} />
+                        <Card data={note} notes={notes} setNotes={setNotes} />
                       </span>
                     )}
                   </Draggable>
@@ -244,12 +205,6 @@ const UtilsNotes = () => {
           </NotesContainer>
         )}
       </Droppable>
-      <ConfirmDialog
-        dialogOpen={dialogOpen}
-        handleConfirmRemove={handleConfirmRemove}
-        handleCloseDialog={handleCloseDialog}
-        text="CONFIRM EXCLUDE?"
-      />
     </DragDropContext>
   )
 }

@@ -2,7 +2,6 @@ import styled from "styled-components/macro"
 import theme from "../../../styles/theme"
 import Grid from "@material-ui/core/Grid"
 import { InfiniteScroll, ScrollBarStyle } from "../../../styles/styles"
-import { Skeleton } from "@material-ui/lab"
 
 export const NotesContainer = styled(Grid)`
   padding: ${theme.spacing(0, 3, 0, 0)};

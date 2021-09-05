@@ -1,5 +1,5 @@
 import styled from "styled-components/macro"
-import theme from "../../../../../styles/theme"
+import theme from "../../../../styles/theme"
 import Grid from "@material-ui/core/Grid"
 
 export const SkeletonContainer = styled.div`
