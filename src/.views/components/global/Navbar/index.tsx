@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react"
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
-import { AppBar, NavContainer } from "./styles"
+import { AppBar, NavContainer, UserContainer } from "./styles"
 import Toolbar from "@material-ui/core/Toolbar"
 import Typography from "@material-ui/core/Typography"
 import IconButton from "@material-ui/core/IconButton"
@@ -68,7 +68,7 @@ export default function NavBar({ utilName }: IUtils) {
           <img src={logo} style={{ width: "100px" }} />
         </NavContainer>
         {auth && (
-          <div>
+          <UserContainer>
             <AvatarButton
               displayName={user.displayName}
               photoURL={user.photoURL}
@@ -92,7 +92,7 @@ export default function NavBar({ utilName }: IUtils) {
               <MenuItem onClick={handleClose}>Profile</MenuItem>
               <MenuItem onClick={handleClose}>My account</MenuItem>
             </Menu>
-          </div>
+          </UserContainer>
         )}
       </Toolbar>
     </AppBar>

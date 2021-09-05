@@ -16,6 +16,16 @@ export const AppBar = styled(AppBarS)`
   }
 `
 
+export const UserContainer = styled.div`
+  .MuiIconButton-root {
+    padding: ${theme.spacing(0.5)}px;
+    margin: ${theme.spacing(1, 0.4)};
+    &:hover {
+      /* background-color: transparent;  */
+    }
+  }
+`
+
 export const IconButton = styled(IconButtonS)`
   padding: 0;
   &:hover {

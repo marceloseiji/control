@@ -124,12 +124,12 @@ export default function OutlinedCard({ data, notes, setNotes }: ICard) {
             <Typography color="textSecondary">{data.text}</Typography>
           </CardContent>
           <CardActions>
-            <Tooltip title="Remove" placement="top">
+            <Tooltip title="Remove" placement="bottom">
               <IconButton onClick={() => removeNote(data.id)} size="small">
                 <DeleteIcon />
               </IconButton>
             </Tooltip>
-            <Tooltip title="Start edit" placement="top">
+            <Tooltip title="Start edit" placement="bottom">
               <IconButton
                 onClick={() => {
                   editNote(data.id)
@@ -159,6 +159,7 @@ export default function OutlinedCard({ data, notes, setNotes }: ICard) {
                 value={editNoteInfos?.text}
                 label="Edit text"
                 variant="outlined"
+                multiline
                 onChange={(event) => {
                   changeNoteText(event.target.value)
                 }}
@@ -166,16 +167,7 @@ export default function OutlinedCard({ data, notes, setNotes }: ICard) {
             </UpdateContainer>
           </CardContent>
           <CardActions>
-            <Tooltip title="Remove" placement="top">
-              <IconButton
-                onClick={() => removeNote(data.id)}
-                size="small"
-                id="delete"
-              >
-                <DeleteIcon />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Cancel edit" placement="top">
+            <Tooltip title="Cancel edit" placement="bottom">
               <IconButton
                 onClick={() => {
                   editNote(data.id)
@@ -186,7 +178,7 @@ export default function OutlinedCard({ data, notes, setNotes }: ICard) {
                 <BlockIcon />
               </IconButton>
             </Tooltip>
-            <Tooltip title="Update" placement="top">
+            <Tooltip title="Update" placement="bottom">
               <IconButton
                 onClick={() => startUpdate(data.id)}
                 size="small"
